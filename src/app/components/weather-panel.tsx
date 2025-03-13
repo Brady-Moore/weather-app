@@ -6,10 +6,10 @@ export default async function WeatherPanel() {
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/tallahassee?unitGroup=us&key=${key}&contentType=json`
     );
     if (!response.ok) {
-      return <div>{response.text()}</div>;
+      return <div>{await response.text()}</div>;
     }
     data = await response.json();
-  } catch (error) {
+  } catch (error: any) {
     return (
       <div>
         There was an error processing the weather data from Visual Crossing.
