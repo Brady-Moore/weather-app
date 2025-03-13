@@ -1,0 +1,50 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - ".github/workflows/**"
+      - "!.github/workflows/test.yml"
+      - "**.md"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse .tool-versions
+        uses: wistia/parse-tool-versions@v2.0.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.TOOL_VERSION_NODEJS }}
+
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+        env:
+          SEGMENT_DOWNLOAD_TIMEOUT_MIN: 10
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check prettier
+        run: npm run prettier:check
+
+      - name: Run Jest tests
+        run: npm test
