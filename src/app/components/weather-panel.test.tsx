@@ -270,4 +270,7 @@ describe("WeatherPanel", () => {
     render(await WeatherPanel());
     screen.getByText(sampleErrorText);
   });
+  test("make it fail", async () => {
+    throw "FAIL";
+  });
 });
