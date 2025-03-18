@@ -1,9 +1,5 @@
-import WeatherPanel from "./components/weather-panel";
+import { getWeatherData } from "./visual-crossing/visual-crossing-api";
 
 export default function Home() {
-  return (
-    <div>
-      <WeatherPanel />
-    </div>
-  );
+  return <div></div>;
 }
