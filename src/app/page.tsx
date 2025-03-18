@@ -1,9 +1,5 @@
-import WeatherPanel from "./components/weather-panel";
+import fetchWeatherData from "./visual-crossing/fetch-weather-data";
 
 export default function Home() {
-  return (
-    <div>
-      <WeatherPanel />
-    </div>
-  );
+  return <div></div>;
 }

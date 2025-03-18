@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import WeatherPanel from "./weather-panel";
+import fetchWeatherData from "./fetch-weather-data";
 
 const visualCrossingSample = {
   queryCost: 1,
@@ -217,11 +217,11 @@ const visualCrossingSample = {
   },
 };
 
-describe("WeatherPanel", () => {
+describe("fetchWeatherData", () => {
   test("calls fetch with key from environment variables", async () => {
     process.env.VISUAL_CROSSING_API_KEY = "123456";
     global.fetch = jest.fn() as jest.Mock;
-    render(await WeatherPanel());
+    render(await fetchWeatherData());
     expect((global.fetch as jest.Mock).mock.lastCall[0]).toContain(
       process.env.VISUAL_CROSSING_API_KEY
     );
@@ -230,7 +230,7 @@ describe("WeatherPanel", () => {
     global.fetch = jest.fn(() =>
       Promise.reject(new Error("fetch failed"))
     ) as jest.Mock;
-    render(await WeatherPanel());
+    render(await fetchWeatherData());
     screen.getByText(
       "There was an error processing the weather data from Visual Crossing."
     );
@@ -240,7 +240,7 @@ describe("WeatherPanel", () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({ json: () => Promise.reject(new Error("not a json")) })
     ) as jest.Mock;
-    render(await WeatherPanel());
+    render(await fetchWeatherData());
     screen.getByText(
       "There was an error processing the weather data from Visual Crossing."
     );
@@ -254,7 +254,7 @@ describe("WeatherPanel", () => {
         json: () => Promise.resolve(visualCrossingSample),
       })
     ) as jest.Mock;
-    render(await WeatherPanel());
+    render(await fetchWeatherData());
     screen.getByText(visualCrossingSample.days[0].temp);
   });
   test("displays error HTML if fetch() returns error status", async () => {
@@ -267,7 +267,7 @@ describe("WeatherPanel", () => {
         statusText: "Not Found",
       })
     ) as jest.Mock;
-    render(await WeatherPanel());
+    render(await fetchWeatherData());
     screen.getByText(sampleErrorText);
   });
 });

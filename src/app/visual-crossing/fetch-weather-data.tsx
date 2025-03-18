@@ -1,4 +1,4 @@
-export default async function WeatherPanel() {
+export default async function fetchWeatherData() {
   const key = process.env.VISUAL_CROSSING_API_KEY || "NO_KEY";
   let data;
   try {
