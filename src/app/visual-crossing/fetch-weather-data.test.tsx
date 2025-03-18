@@ -1,4 +1,3 @@
-import { render, screen } from "@testing-library/react";
 import { getWeatherData } from "./fetch-weather-data";
 
 const visualCrossingSample = {
