@@ -1,4 +1,4 @@
-import { getWeatherData } from "./fetch-weather-data";
+import { getWeatherData } from "./visual-crossing-api";
 
 const visualCrossingSample = {
   queryCost: 1,

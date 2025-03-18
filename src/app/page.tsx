@@ -1,4 +1,4 @@
-import { getWeatherData } from "./visual-crossing/fetch-weather-data";
+import { getWeatherData } from "./visual-crossing/visual-crossing-api";
 
 export default function Home() {
   return <div></div>;
