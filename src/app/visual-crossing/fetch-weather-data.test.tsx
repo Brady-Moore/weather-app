@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import fetchWeatherData from "./fetch-weather-data";
+import { getWeatherData } from "./fetch-weather-data";
 
 const visualCrossingSample = {
   queryCost: 1,
@@ -221,31 +221,33 @@ describe("fetchWeatherData", () => {
   test("calls fetch with key from environment variables", async () => {
     process.env.VISUAL_CROSSING_API_KEY = "123456";
     global.fetch = jest.fn() as jest.Mock;
-    render(await fetchWeatherData());
+    await getWeatherData();
     expect((global.fetch as jest.Mock).mock.lastCall[0]).toContain(
       process.env.VISUAL_CROSSING_API_KEY
     );
   });
-  test("displays error HTML if fetch() throws", async () => {
+  test("returns error if fetch() throws", async () => {
     global.fetch = jest.fn(() =>
       Promise.reject(new Error("fetch failed"))
     ) as jest.Mock;
-    render(await fetchWeatherData());
-    screen.getByText(
-      "There was an error processing the weather data from Visual Crossing."
-    );
+    const dataResponse = await getWeatherData();
+    expect(dataResponse.success).toBe(false);
+    expect(dataResponse.error?.message).toBe("fetch failed");
   });
 
-  test("displays error HTML if response.json() throws", async () => {
+  test("returns error if response.json() throws", async () => {
     global.fetch = jest.fn(() =>
-      Promise.resolve({ json: () => Promise.reject(new Error("not a json")) })
+      Promise.resolve({
+        json: () => Promise.reject(new Error("not a json")),
+        ok: true,
+      })
     ) as jest.Mock;
-    render(await fetchWeatherData());
-    screen.getByText(
-      "There was an error processing the weather data from Visual Crossing."
-    );
+    const dataResponse = await getWeatherData();
+    expect(dataResponse.success).toBe(false);
+    expect(dataResponse.error?.message).toBe("not a json");
   });
-  test("displays expected temperature data", async () => {
+
+  test("return expected temperature data", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -254,20 +256,26 @@ describe("fetchWeatherData", () => {
         json: () => Promise.resolve(visualCrossingSample),
       })
     ) as jest.Mock;
-    render(await fetchWeatherData());
-    screen.getByText(visualCrossingSample.days[0].temp);
+    const dataResponse = await getWeatherData();
+    expect(dataResponse.success).toBe(true);
+    expect(dataResponse.data).toBe(visualCrossingSample);
   });
-  test("displays error HTML if fetch() returns error status", async () => {
+  test("returns error if fetch() returns error status", async () => {
     const sampleErrorText = "404: Data does not exist";
+    const sampleStatus = 404;
+    const sampleStatusText = "Not Found";
     global.fetch = jest.fn(() =>
       Promise.resolve({
         text: () => Promise.resolve(sampleErrorText),
         ok: false,
-        status: 404,
-        statusText: "Not Found",
+        status: sampleStatus,
+        statusText: sampleStatusText,
       })
     ) as jest.Mock;
-    render(await fetchWeatherData());
-    screen.getByText(sampleErrorText);
+    const dataResponse = await getWeatherData();
+    expect(dataResponse.success).toBe(false);
+    expect(dataResponse.error?.message).toBe(sampleErrorText);
+    expect(dataResponse.error?.httpStatus).toBe(sampleStatus);
+    expect(dataResponse.error?.httpStatusText).toBe(sampleStatusText);
   });
 });
