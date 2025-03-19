@@ -7,8 +7,8 @@ interface ErrorMessageProps {
 export default function ErrorMessage({ error }: ErrorMessageProps) {
   return (
     <div>
-      There was an error fetching the data from the Visual Crossing API. The
-      query limit may have been reached. Error: {error.message}
+      There was an error fetching the data from the Visual Crossing API. Error:{" "}
+      {error.message}
       {error.httpStatus}
       {error.httpStatusText}
     </div>
