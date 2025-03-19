@@ -94,12 +94,14 @@ interface WeatherDataResponse {
   error?: WeatherApiError;
 }
 
-export async function getWeatherData(): Promise<WeatherDataResponse> {
+export async function getWeatherData(
+  city: string
+): Promise<WeatherDataResponse> {
   const key = process.env.VISUAL_CROSSING_API_KEY || "NO_KEY";
   let data: WeatherData;
   try {
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/tallahassee?unitGroup=us&key=${key}&contentType=json`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=us&key=${key}&contentType=json`
     );
     if (!response.ok) {
       return {

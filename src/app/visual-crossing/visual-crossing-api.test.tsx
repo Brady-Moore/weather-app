@@ -217,19 +217,29 @@ const visualCrossingSample = {
 };
 
 describe("fetchWeatherData", () => {
+  const sampleCityName = "samplecityname";
   test("calls fetch with key from environment variables", async () => {
     process.env.VISUAL_CROSSING_API_KEY = "123456";
     global.fetch = jest.fn() as jest.Mock;
-    await getWeatherData();
+    await getWeatherData(sampleCityName);
     expect((global.fetch as jest.Mock).mock.lastCall[0]).toContain(
       process.env.VISUAL_CROSSING_API_KEY
     );
   });
+
+  test("calls fetch with city from passed city parameter", async () => {
+    global.fetch = jest.fn() as jest.Mock;
+    await getWeatherData(sampleCityName);
+    expect((global.fetch as jest.Mock).mock.lastCall[0]).toContain(
+      sampleCityName
+    );
+  });
+
   test("returns error if fetch() throws", async () => {
     global.fetch = jest.fn(() =>
       Promise.reject(new Error("fetch failed"))
     ) as jest.Mock;
-    const dataResponse = await getWeatherData();
+    const dataResponse = await getWeatherData(sampleCityName);
     expect(dataResponse.success).toBe(false);
     expect(dataResponse.error?.message).toBe("fetch failed");
   });
@@ -241,7 +251,7 @@ describe("fetchWeatherData", () => {
         ok: true,
       })
     ) as jest.Mock;
-    const dataResponse = await getWeatherData();
+    const dataResponse = await getWeatherData(sampleCityName);
     expect(dataResponse.success).toBe(false);
     expect(dataResponse.error?.message).toBe("not a json");
   });
@@ -255,7 +265,7 @@ describe("fetchWeatherData", () => {
         json: () => Promise.resolve(visualCrossingSample),
       })
     ) as jest.Mock;
-    const dataResponse = await getWeatherData();
+    const dataResponse = await getWeatherData(sampleCityName);
     expect(dataResponse.success).toBe(true);
     expect(dataResponse.data).toBe(visualCrossingSample);
   });
@@ -271,7 +281,7 @@ describe("fetchWeatherData", () => {
         statusText: sampleStatusText,
       })
     ) as jest.Mock;
-    const dataResponse = await getWeatherData();
+    const dataResponse = await getWeatherData(sampleCityName);
     expect(dataResponse.success).toBe(false);
     expect(dataResponse.error?.message).toBe(sampleErrorText);
     expect(dataResponse.error?.httpStatus).toBe(sampleStatus);
