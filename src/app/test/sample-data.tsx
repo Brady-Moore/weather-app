@@ -1,3 +1,5 @@
+import { WeatherData } from "../visual-crossing/visual-crossing-api";
+
 export const visualCrossingSampleData = {
   queryCost: 1,
   latitude: 30.4398,
@@ -212,4 +214,4 @@ export const visualCrossingSampleData = {
     sunsetEpoch: 1741909466,
     moonphase: 0.48,
   },
-};
+} as unknown as WeatherData;

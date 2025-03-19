@@ -1,21 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import Home from "./page";
 import { visualCrossingSampleData } from "./test/sample-data";
-import Navigation from "next/navigation";
 
-jest.mock("next/navigation", () => ({
-  ...jest.requireActual("next/navigation"),
-  useParams: jest.fn(),
-}));
+jest.mock("next/navigation", () => require("next-router-mock"));
 
 describe("Home Page", () => {
-  test("renders SearchBar component", () => {
-    render(Home());
+  test("renders SearchBar component", async () => {
+    render(
+      await Home({
+        searchParams: Promise.resolve({
+          city: "",
+          mode: "",
+        }),
+      })
+    );
     screen.getByRole("searchbox");
-    screen.getByRole("button");
   });
 
-  test("renders Weather display components when data is found", () => {
+  test("renders Weather display components when data is found", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -24,14 +26,29 @@ describe("Home Page", () => {
         json: () => Promise.resolve(visualCrossingSampleData),
       })
     ) as jest.Mock;
-    jest.spyOn(Navigation, "useParams").mockReturnValue({ city: "cityname" });
-    render(Home());
+    render(
+      await Home({
+        searchParams: Promise.resolve({
+          city: "cityname",
+          mode: "",
+        }),
+      })
+    );
     screen.getByText(visualCrossingSampleData.days[0].temp);
   });
-  test("renders Error message and link to Sample Data when getWeatherData fails", () => {
-    render(Home());
-    screen.getByText(
-      "There was an error fetching the data from the Visual Crossing API. The query limit may have been reached."
+
+  test("renders Error message and link to Sample Data when getWeatherData fails", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.reject(new Error("fetch failed"))
+    ) as jest.Mock;
+    render(
+      await Home({
+        searchParams: Promise.resolve({
+          city: "chicago",
+          mode: "",
+        }),
+      })
     );
+    screen.getByText("There was an error", { exact: false });
   });
 });

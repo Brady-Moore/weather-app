@@ -1,9 +1,9 @@
-interface WeatherDataDay {
+export interface WeatherDataDay {
   // datetime: "2025-03-18";
   // datetimeEpoch: 1742270400;
   // tempmax: 78;
   // tempmin: 38;
-  // temp: 58.2;
+  temp: number;
   // feelslikemax: 78;
   // feelslikemin: 38;
   // feelslike: 58.2;
@@ -37,7 +37,7 @@ interface WeatherDataDay {
   // source: "comb";
 }
 
-interface CurrentConditions {
+export interface CurrentConditions {
   // datetime: "04:50:00";
   // datetimeEpoch: 1742287800;
   // temp: 53.7;
@@ -69,7 +69,7 @@ interface CurrentConditions {
   // moonphase: 0.64;
 }
 
-interface WeatherData {
+export interface WeatherData {
   latitude: number;
   longitude: number;
   resolvedAddress: string;
@@ -82,13 +82,13 @@ interface WeatherData {
   currentConditions: CurrentConditions;
 }
 
-interface WeatherApiError {
+export interface WeatherApiError {
   message: string;
   httpStatus?: number;
   httpStatusText?: string;
 }
 
-interface WeatherDataResponse {
+export interface WeatherDataResponse {
   success: boolean;
   data?: WeatherData;
   error?: WeatherApiError;
