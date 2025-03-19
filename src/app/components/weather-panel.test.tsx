@@ -1,6 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import WeatherPanel from "./weather-panel";
 
+import Navigation from "next/navigation";
+
+jest.mock("next/navigation", () => ({
+  ...jest.requireActual("next/navigation"),
+  useParams: jest.fn(),
+}));
+
 const visualCrossingSample = {
   queryCost: 1,
   latitude: 30.4398,
