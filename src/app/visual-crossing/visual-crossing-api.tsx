@@ -100,8 +100,9 @@ export async function getWeatherData(
   const key = process.env.VISUAL_CROSSING_API_KEY || "NO_KEY";
   let data: WeatherData;
   try {
+    const encodedCity = encodeURIComponent(city);
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=us&key=${key}&contentType=json`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}?unitGroup=us&key=${key}&contentType=json`
     );
     if (!response.ok) {
       return {
