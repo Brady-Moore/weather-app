@@ -12,7 +12,11 @@ export default function SearchBar() {
       <input type="search" ref={searchBoxRef} />
       <button
         type="button"
-        onClick={() => router.push(`/?city=${searchBoxRef.current?.value}`)}
+        onClick={() => {
+          router.push(
+            `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
+          );
+        }}
       >
         Search
       </button>

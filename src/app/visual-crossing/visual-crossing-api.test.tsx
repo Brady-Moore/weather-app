@@ -54,6 +54,7 @@ describe("fetchWeatherData", () => {
     expect(dataResponse.success).toBe(true);
     expect(dataResponse.data).toBe(visualCrossingSampleData);
   });
+
   test("returns error if fetch() returns error status", async () => {
     const sampleErrorText = "404: Data does not exist";
     const sampleStatus = 404;
