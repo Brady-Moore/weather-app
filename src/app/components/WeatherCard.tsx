@@ -11,7 +11,7 @@ interface WeatherCardProps {
 }
 export default function WeatherCard(props: WeatherCardProps) {
   return (
-    <div className="grid col-auto">
+    <div>
       <CardBorder>
         <div>
           <div className="inline">{props.icon}</div>
