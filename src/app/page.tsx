@@ -4,6 +4,7 @@ import { visualCrossingSampleData } from "./test/sample-data";
 import SampleDataLink from "./components/SampleDataLink";
 import ErrorMessage from "./components/ErrorMessage";
 import FeelsLikeCard from "./components/FeelsLikeCard";
+import HumidityCard from "./components/HumidityCard";
 
 const feelsLikeDescription = (temp: number, feelslike: number) => {
   return temp > feelslike
@@ -27,18 +28,22 @@ export default async function Home({ searchParams }: HomeProps) {
         : undefined;
 
   return (
-    <div>
+    <div className="p-5">
       <SearchBar />
       {weatherDataResponse?.error ? (
         <ErrorMessage error={weatherDataResponse.error} />
       ) : null}
       {!weatherDataResponse?.data ? <SampleDataLink /> : null}
-      <div className="weather-display-container">
+      <div>
         {weatherDataResponse?.data ? (
-          <div>
+          <div className="grid">
             <FeelsLikeCard
               temp={weatherDataResponse.data.days[0].temp}
               feelslike={weatherDataResponse.data.days[0].feelslike}
+            />
+            <HumidityCard
+              dew={weatherDataResponse.data.days[0].temp}
+              humidity={weatherDataResponse.data.days[0].humidity}
             />
           </div>
         ) : null}

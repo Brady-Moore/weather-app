@@ -9,7 +9,11 @@ export default function SearchBar() {
 
   return (
     <div>
-      <input type="search" ref={searchBoxRef} />
+      <input
+        type="search"
+        ref={searchBoxRef}
+        className="outline-2 outline-red-400"
+      />
       <button
         type="button"
         onClick={() => {

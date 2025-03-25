@@ -1,3 +1,4 @@
+// https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/#response-section
 export interface WeatherDataDay {
   // datetime: "2025-03-18";
   // datetimeEpoch: 1742270400;
@@ -7,8 +8,8 @@ export interface WeatherDataDay {
   // feelslikemax: 78;
   // feelslikemin: 38;
   feelslike: number; // eg. 58.2;
-  // dew: 33.5;
-  // humidity: 44.2;
+  dew: number; // eg. 33.5
+  humidity: number; // eg. 44.2
   // precip: 0;
   // precipprob: 0;
   // precipcover: 0;
