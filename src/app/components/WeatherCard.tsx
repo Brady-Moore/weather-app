@@ -1,8 +1,22 @@
-import { WeatherData } from "../visual-crossing/visual-crossing-api";
+import { ReactNode } from "react";
+import { IconType } from "rocketicons";
 
 interface WeatherCardProps {
-  data: WeatherData;
+  icon: ReactNode;
+  title: string;
+  info: number | string;
+  description?: string;
+  children?: ReactNode;
 }
 export default function WeatherCard(props: WeatherCardProps) {
-  return <div>{props.data.days[0].temp}</div>;
+  return (
+    <>
+      <div>
+        <div className="inline">{props.icon}</div>
+        {props.title}
+      </div>
+      <div>{props.info}</div>
+      <div>{props.description}</div>
+    </>
+  );
 }

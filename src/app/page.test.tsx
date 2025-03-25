@@ -34,7 +34,9 @@ describe("Home Page", () => {
         }),
       })
     );
-    screen.getByText(visualCrossingSampleData.days[0].temp);
+    screen.getByText(
+      Math.floor(visualCrossingSampleData.days[0].temp + 0.5) + "°"
+    );
   });
 
   test("renders Error message and link to Sample Data when getWeatherData fails", async () => {
@@ -74,11 +76,7 @@ describe("Home Page", () => {
     screen.getByText("61°");
     screen.getByText("Feels about the same as the actual temperature");
 
-    const rainyIcon = screen.getByAltText(/rainy/i);
-    expect(rainyIcon).toBeInTheDocument();
-    expect(rainyIcon).toHaveAttribute(
-      "src",
-      expect.stringContaining("rainy.svg")
-    );
+    const feelLikeIcon = screen.getByAltText("feels-like");
+    expect(feelLikeIcon).toBeInTheDocument();
   });
 });
