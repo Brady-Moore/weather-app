@@ -1,18 +1,18 @@
 export interface WeatherDataDay {
   // datetime: "2025-03-18";
   // datetimeEpoch: 1742270400;
-  // tempmax: 78;
-  // tempmin: 38;
-  temp: number;
+  tempmax: number; // eg. 38
+  tempmin: number; // eg. 38
+  temp: number; // eg. 62.1
   // feelslikemax: 78;
   // feelslikemin: 38;
-  // feelslike: 58.2;
+  feelslike: number; // eg. 58.2;
   // dew: 33.5;
   // humidity: 44.2;
   // precip: 0;
   // precipprob: 0;
   // precipcover: 0;
-  // preciptype: null;
+  // preciptype: string[] | null; // eg. ["rain"];
   // snow: 0;
   // snowdepth: 0;
   // windgust: 9.2;
@@ -30,11 +30,69 @@ export interface WeatherDataDay {
   // sunset: "19:47:39";
   // sunsetEpoch: 1742341659;
   // moonphase: 0.64;
-  // conditions: "Clear";
+  conditions: string; // eg "Clear"
   // description: "Clear conditions throughout the day.";
-  // icon: "clear-day";
+  icon: string; // eg ""clear-day""
   // stations: ["K2J9", "KTLH", "KBGE", "1080W"];
   // source: "comb";
+  // "hours": [
+  //   {
+  //    "datetime": "12:00:00",
+  //    "datetimeEpoch": 1742486400,
+  //    "temp": 63.9,
+  //    "feelslike": 63.9,
+  //    "humidity": 67.48,
+  //    "dew": 53,
+  //    "precip": 0.012,
+  //    "precipprob": 2,
+  //    "snow": 0,
+  //    "snowdepth": 0,
+  //    "preciptype": [
+  //     "rain"
+  //    ],
+  //    "windgust": 23,
+  //    "windspeed": 11.4,
+  //    "winddir": 290,
+  //    "pressure": 1015,
+  //    "visibility": 10.1,
+  //    "cloudcover": 68,
+  //    "solarradiation": 260,
+  //    "solarenergy": 0.9,
+  //    "uvindex": 3,
+  //    "severerisk": 10,
+  //    "conditions": "Partially cloudy",
+  //    "icon": "partly-cloudy-day",
+  //    "stations": null,
+  //    "source": "fcst"
+  //   },
+  //   {
+  //    "datetime": "13:00:00",
+  //    "datetimeEpoch": 1742490000,
+  //    "temp": 69,
+  //    "feelslike": 69,
+  //    "humidity": 48.95,
+  //    "dew": 49,
+  //    "precip": 0,
+  //    "precipprob": 0,
+  //    "snow": 0,
+  //    "snowdepth": 0,
+  //    "preciptype": null,
+  //    "windgust": 24.2,
+  //    "windspeed": 13.9,
+  //    "winddir": 280,
+  //    "pressure": 1015,
+  //    "visibility": 10.1,
+  //    "cloudcover": 20,
+  //    "solarradiation": 741,
+  //    "solarenergy": 2.7,
+  //    "uvindex": 7,
+  //    "severerisk": 10,
+  //    "conditions": "Clear",
+  //    "icon": "clear-day",
+  //    "stations": null,
+  //    "source": "fcst"
+  //   }
+  //  ]
 }
 
 export interface CurrentConditions {

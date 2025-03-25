@@ -1,6 +1,6 @@
 import { getWeatherData } from "./visual-crossing/visual-crossing-api";
 import SearchBar from "./components/SearchBar";
-import WeatherDisplay from "./components/WeatherDisplay";
+import WeatherCard from "./components/WeatherCard";
 import { visualCrossingSampleData } from "./test/sample-data";
 import SampleDataLink from "./components/SampleDataLink";
 import ErrorMessage from "./components/ErrorMessage";
@@ -24,9 +24,11 @@ export default async function Home({
         <ErrorMessage error={weatherDataResponse.error} />
       ) : null}
       {!weatherDataResponse?.data ? <SampleDataLink /> : null}
-      {weatherDataResponse?.data ? (
-        <WeatherDisplay data={weatherDataResponse.data} />
-      ) : null}
+      <div className="weather-display-container">
+        {weatherDataResponse?.data ? (
+          <WeatherCard data={weatherDataResponse.data} />
+        ) : null}
+      </div>
     </div>
   );
 }

@@ -51,4 +51,34 @@ describe("Home Page", () => {
     );
     screen.getByText("There was an error", { exact: false });
   });
+
+  test("renders Feels Like WeatherCard correctly", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        statusText: "OK",
+        json: () => Promise.resolve(visualCrossingSampleData),
+      })
+    ) as jest.Mock;
+    render(
+      await Home({
+        searchParams: Promise.resolve({
+          city: "cityname",
+          mode: "",
+        }),
+      })
+    );
+
+    screen.getByText("Feels like");
+    screen.getByText("61°");
+    screen.getByText("Feels about the same as the actual temperature");
+
+    const rainyIcon = screen.getByAltText(/rainy/i);
+    expect(rainyIcon).toBeInTheDocument();
+    expect(rainyIcon).toHaveAttribute(
+      "src",
+      expect.stringContaining("rainy.svg")
+    );
+  });
 });

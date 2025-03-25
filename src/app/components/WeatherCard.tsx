@@ -1,8 +1,8 @@
 import { WeatherData } from "../visual-crossing/visual-crossing-api";
 
-interface WeatherDisplayProps {
+interface WeatherCardProps {
   data: WeatherData;
 }
-export default function WeatherDisplay(props: WeatherDisplayProps) {
+export default function WeatherCard(props: WeatherCardProps) {
   return <div>{props.data.days[0].temp}</div>;
 }
