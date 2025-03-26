@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import UVIndexCard from "./UVIndexCard";
 
-describe("UVIndex", () => {
+describe("UVIndexCard", () => {
   test("displays UV index properly", () => {
     render(<UVIndexCard uvindex={1} />);
     expect(screen.getByText("1")).toBeInTheDocument();
