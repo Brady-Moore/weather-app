@@ -11,7 +11,9 @@ export default function SearchBar() {
 
   const handleInputChange = (async (event) => {
     setAutoSuggestions(
-      (await citySearch(event.target.value)).map((cityRow) => cityRow.name)
+      (await citySearch(event.target.value)).map(
+        (cityRow) => `${cityRow.name}, ${cityRow["country code"]}`
+      )
     );
   }) as ChangeEventHandler<HTMLInputElement>;
 
