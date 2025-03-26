@@ -8,15 +8,15 @@ describe("HumidityCard", () => {
     expect(screen.getByText("The dew point is 18°")).toBeInTheDocument();
   });
 
-  test("renders WiHumidity icon", () => {
-    render(<HumidityCard humidity={70} dew={15} />);
-    expect(screen.getByTestId("humidity-icon")).toBeInTheDocument();
-  });
-
   test("displays rounded values", () => {
     render(<HumidityCard humidity={59.5} dew={12.9} />);
 
     expect(screen.getByText("60%")).toBeInTheDocument();
     expect(screen.getByText("The dew point is 13°")).toBeInTheDocument();
+  });
+
+  test("renders WiHumidity icon", () => {
+    render(<HumidityCard humidity={70} dew={15} />);
+    expect(screen.getByTestId("humidity-icon")).toBeInTheDocument();
   });
 });
