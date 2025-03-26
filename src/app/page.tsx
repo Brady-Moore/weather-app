@@ -6,6 +6,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import FeelsLikeCard from "./components/FeelsLikeCard";
 import HumidityCard from "./components/HumidityCard";
 import VisibilityCard from "./components/VisibilityCard";
+import UVIndexCard from "./components/UVIndexCard";
 
 const feelsLikeDescription = (temp: number, feelslike: number) => {
   return temp > feelslike
@@ -49,6 +50,7 @@ export default async function Home({ searchParams }: HomeProps) {
             <VisibilityCard
               visibility={weatherDataResponse.data.days[0].visibility}
             />
+            <UVIndexCard uvindex={weatherDataResponse.data.days[0].uvindex} />
           </div>
         ) : null}
       </div>

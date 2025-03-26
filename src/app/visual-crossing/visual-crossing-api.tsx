@@ -24,7 +24,7 @@ export interface WeatherDataDay {
   visibility: number; // eg. 10
   // solarradiation: 290;
   // solarenergy: 25.2;
-  // uvindex: 9;
+  uvindex: number; // eg. 9
   // severerisk: 10;
   // sunrise: "07:42:57";
   // sunriseEpoch: 1742298177;
