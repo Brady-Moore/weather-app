@@ -21,7 +21,7 @@ export interface WeatherDataDay {
   // winddir: 42.7;
   // pressure: 1022.5;
   // cloudcover: 5.7;
-  // visibility: 10;
+  visibility: number; // eg. 10
   // solarradiation: 290;
   // solarenergy: 25.2;
   // uvindex: 9;

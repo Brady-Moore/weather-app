@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import VisibilityCard from "./VisibilityCard";
 
 describe("VisibilityCard", () => {
   test("displays pressure units properly", () => {
@@ -7,7 +8,7 @@ describe("VisibilityCard", () => {
   });
 
   test("displays pressure icon", () => {
-    render(<VisibilityCard />);
+    render(<VisibilityCard visibility={12} />);
     expect(screen.getByTestId("visibility-icon")).toBeInTheDocument();
   });
 });
