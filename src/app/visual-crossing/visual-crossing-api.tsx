@@ -16,9 +16,9 @@ export interface WeatherDataDay {
   preciptype: string[] | null; // eg. ["rain"];
   // snow: 0;
   // snowdepth: 0;
-  // windgust: 9.2;
-  // windspeed: 4.9;
-  // winddir: 42.7;
+  windgust: number; // eg. 9.2
+  windspeed: number; // eg. 4.9
+  winddir: number; // eg. 42.7
   pressure: number; // eg. 1022.5
   // cloudcover: 5.7;
   visibility: number; // eg. 10
