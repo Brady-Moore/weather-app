@@ -29,7 +29,7 @@ export default function SearchBar() {
       {autoSuggestions.length > 0 ? (
         <div className="border-1 inline-block">
           {autoSuggestions.map((sug) => (
-            <div>{sug}</div>
+            <div key={sug}>{sug}</div>
           ))}
         </div>
       ) : null}
