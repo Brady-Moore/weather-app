@@ -26,9 +26,9 @@ export interface WeatherDataDay {
   // solarenergy: 25.2;
   uvindex: number; // eg. 9
   // severerisk: 10;
-  // sunrise: "07:42:57";
+  sunrise: string; // eg. "07:42:57"
   // sunriseEpoch: 1742298177;
-  // sunset: "19:47:39";
+  sunset: string; // eg. "19:47:39"
   // sunsetEpoch: 1742341659;
   // moonphase: 0.64;
   conditions: string; // eg "Clear"
