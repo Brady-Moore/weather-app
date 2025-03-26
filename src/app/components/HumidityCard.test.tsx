@@ -13,7 +13,7 @@ describe("HumidityCard", () => {
     expect(screen.getByTestId("humidity-icon")).toBeInTheDocument();
   });
 
-  test("displays exact values after rounding", () => {
+  test("displays rounded values", () => {
     render(<HumidityCard humidity={59.5} dew={12.9} />);
 
     expect(screen.getByText("60%")).toBeInTheDocument();
