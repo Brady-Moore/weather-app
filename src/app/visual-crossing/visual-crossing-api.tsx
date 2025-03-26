@@ -10,10 +10,10 @@ export interface WeatherDataDay {
   feelslike: number; // eg. 58.2;
   dew: number; // eg. 33.5
   humidity: number; // eg. 44.2
-  // precip: 0;
+  precip: number; // eg. 1.1
   // precipprob: 0;
   // precipcover: 0;
-  // preciptype: string[] | null; // eg. ["rain"];
+  preciptype: string[] | null; // eg. ["rain"];
   // snow: 0;
   // snowdepth: 0;
   // windgust: 9.2;
