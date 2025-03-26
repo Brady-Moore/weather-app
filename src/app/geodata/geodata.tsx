@@ -21,7 +21,7 @@ async function buildCitiesFromFileAsync() {
 
 function buildCitiesTrie(data: CityDataRow[]) {
   const trie: TrieSearch<CityDataRow> = new TrieSearch<CityDataRow>(
-    "asciiname",
+    ["name", "asciiname"],
     { min: 2 }
   );
   trie.addAll(data);
