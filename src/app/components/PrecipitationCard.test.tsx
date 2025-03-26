@@ -12,14 +12,15 @@ describe("PrecipitationCard", () => {
     expect(screen.getByTestId("precipitation-icon")).toBeInTheDocument();
   });
 
-  test("displays rounded values", () => {
-    render(<PrecipitationCard precip={1.6} tomorrowPrecip={3} />);
-
-    expect(screen.getByText("2 mm")).toBeInTheDocument();
-  });
-
   test("displays expected precipitation for tomorrow", () => {
     render(<PrecipitationCard precip={3} tomorrowPrecip={7} />);
     expect(screen.getByText("7 mm expected tomorrow.")).toBeInTheDocument();
+  });
+
+  test("displays rounded values", () => {
+    render(<PrecipitationCard precip={1.6} tomorrowPrecip={3.2} />);
+
+    expect(screen.getByText("2 mm")).toBeInTheDocument();
+    expect(screen.getByText("3 mm expected tomorrow.")).toBeInTheDocument();
   });
 });
