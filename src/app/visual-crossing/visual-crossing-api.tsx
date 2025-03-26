@@ -19,7 +19,7 @@ export interface WeatherDataDay {
   // windgust: 9.2;
   // windspeed: 4.9;
   // winddir: 42.7;
-  // pressure: 1022.5;
+  pressure: number; // eg. 1022.5
   // cloudcover: 5.7;
   visibility: number; // eg. 10
   // solarradiation: 290;

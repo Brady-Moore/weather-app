@@ -7,6 +7,7 @@ import FeelsLikeCard from "./components/FeelsLikeCard";
 import HumidityCard from "./components/HumidityCard";
 import VisibilityCard from "./components/VisibilityCard";
 import UVIndexCard from "./components/UVIndexCard";
+import PressureCard from "./components/PressureCard";
 
 const feelsLikeDescription = (temp: number, feelslike: number) => {
   return temp > feelslike
@@ -51,6 +52,9 @@ export default async function Home({ searchParams }: HomeProps) {
               visibility={weatherDataResponse.data.days[0].visibility}
             />
             <UVIndexCard uvindex={weatherDataResponse.data.days[0].uvindex} />
+            <PressureCard
+              pressure={weatherDataResponse.data.days[0].pressure}
+            />
           </div>
         ) : null}
       </div>
