@@ -19,8 +19,6 @@ async function buildCitiesFromFileAsync() {
   return data;
 }
 
-const cityData = await buildCitiesFromFileAsync();
-
 function buildCitiesTrie(data: CityDataRow[]) {
   const trie: TrieSearch<CityDataRow> = new TrieSearch<CityDataRow>(
     "asciiname",
@@ -30,8 +28,19 @@ function buildCitiesTrie(data: CityDataRow[]) {
   return trie;
 }
 
-const citiesTrie = buildCitiesTrie(cityData);
+let cityData: CityDataRow[] | undefined;
+let citiesTrie: TrieSearch<CityDataRow> | undefined;
+
+export async function cityLoadIfNeeded() {
+  if (!cityData) {
+    cityData = await buildCitiesFromFileAsync();
+  }
+  if (!citiesTrie) {
+    citiesTrie = buildCitiesTrie(cityData);
+  }
+}
 
 export async function citySearch(query: string) {
-  return citiesTrie.search(query);
+  await cityLoadIfNeeded();
+  return citiesTrie?.search(query) || [];
 }

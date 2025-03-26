@@ -4,12 +4,16 @@ import WeatherDisplay from "./components/WeatherDisplay";
 import { visualCrossingSampleData } from "./test/sample-data";
 import SampleDataLink from "./components/SampleDataLink";
 import ErrorMessage from "./components/ErrorMessage";
+import { cityLoadIfNeeded } from "./geodata/geodata";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  // Preload city data for autocomplete
+  await cityLoadIfNeeded();
+
   const { city, mode } = await searchParams;
   const weatherDataResponse =
     mode === "sample"
