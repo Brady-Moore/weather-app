@@ -13,7 +13,7 @@ describe("SunsetCard", () => {
   });
 
   test("renders Sunset icon", () => {
-    render(<SunsetCard sunset={63.7} tomorrowSunrise={18.4} />);
+    render(<SunsetCard sunset={"19:47:39"} tomorrowSunrise={"07:42:57"} />);
     expect(screen.getByTestId("sunset-icon")).toBeInTheDocument();
   });
 });
