@@ -75,8 +75,5 @@ describe("Home Page", () => {
     screen.getByText("Feels like");
     screen.getByText("61°");
     screen.getByText("Feels about the same as the actual temperature");
-
-    const feelLikeIcon = screen.getByAltText("feels-like");
-    expect(feelLikeIcon).toBeInTheDocument();
   });
 });

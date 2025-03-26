@@ -33,4 +33,10 @@ describe("FeelsLikeCard component", () => {
       screen.getByText("Feels about the same as the actual temperature")
     ).toBeInTheDocument();
   });
+
+  test("renders thermometer icon", () => {
+    render(<FeelsLikeCard temp={25} feelslike={22.3} />);
+    const icon = screen.getByTestId("thermometer-icon");
+    expect(icon).toBeInTheDocument();
+  });
 });

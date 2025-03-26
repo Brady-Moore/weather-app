@@ -23,7 +23,12 @@ export default function FeelsLikeCard(props: FeelsLikeCardProps) {
   return (
     <WeatherCard
       title="Feels like"
-      icon={<WiThermometer className="size-5 inline text-yellow-400" />}
+      icon={
+        <WiThermometer
+          className="size-5 inline text-yellow-400"
+          data-testid="thermometer-icon"
+        />
+      }
       info={`${feelslikeRound}°`}
       description={feelsLikeDescription(props.temp, props.feelslike)}
     />
