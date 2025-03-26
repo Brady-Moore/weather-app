@@ -11,9 +11,14 @@ export default function humidityCard(props: HumidityCardProps) {
   return (
     <WeatherCard
       title="Humidity"
-      icon={<WiHumidity className="size-5 inline text-green-400" />}
+      icon={
+        <WiHumidity
+          className="size-5 inline text-green-400"
+          data-testid="humidity-icon"
+        />
+      }
       info={`${roundNumber(props.humidity)}%`}
-      description={`The dew point is ${roundNumber(props.dew)}`}
+      description={`The dew point is ${roundNumber(props.dew)}°`}
     />
   );
 }
