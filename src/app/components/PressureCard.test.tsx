@@ -3,8 +3,8 @@ import { render, screen } from "@testing-library/react";
 
 describe("PressureCard", () => {
   test("displays atmospheric pressure properly", () => {
-    render(<PressureCard pressure={999} />);
-    expect(screen.getByText("1999 hPa")).toBeInTheDocument();
+    render(<PressureCard pressure={999.7} />);
+    expect(screen.getByText("999 hPa")).toBeInTheDocument();
   });
 
   test("displays UV icon", () => {
