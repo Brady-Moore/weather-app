@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChangeEventHandler, useRef, useState } from "react";
+import { KeyboardEventHandler, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
 import { CityDataRow } from "../geodata/geodata-types";
 
@@ -25,6 +25,10 @@ function getCitySortCompare({
   }
 }
 
+function createAutoSuggestQueryFromCityDataRow(cityData: CityDataRow) {
+  return `${cityData.name}, ${cityData["country code"]}`;
+}
+
 export interface SearchBarProps {
   /**
    * replace the `className` on main div
@@ -46,10 +50,12 @@ export default function SearchBar(props: SearchBarProps) {
   const router = useRouter();
   const searchBoxRef = useRef<HTMLInputElement>(null);
   const [autoSuggestions, setAutoSuggestions] = useState<CityDataRow[]>([]);
+  const [autoSuggestionSelected, setAutoSuggestionSelected] = useState(-1);
+  const [searchHasFocus, setSearchHasFocus] = useState(false);
 
-  const handleInputChange = (async (event) => {
+  const updateAutoSuggestions = async (query: string) => {
     setAutoSuggestions(
-      (await citySearch(event.target.value))
+      (await citySearch(query))
         .sort(
           getCitySortCompare({
             sort: props.autoSuggestSort,
@@ -58,7 +64,39 @@ export default function SearchBar(props: SearchBarProps) {
         )
         .slice(0, props.autoSuggestLimit)
     );
-  }) as ChangeEventHandler<HTMLInputElement>;
+    setAutoSuggestionSelected(-1);
+  };
+
+  const setSearchInputFromSelectedAutoSuggestion = () => {
+    if (
+      searchBoxRef.current &&
+      autoSuggestionSelected >= 0 &&
+      autoSuggestionSelected < autoSuggestions.length
+    ) {
+      searchBoxRef.current.value = createAutoSuggestQueryFromCityDataRow(
+        autoSuggestions[autoSuggestionSelected]
+      );
+    }
+  };
+
+  const handleSearchKeyDown = ((event) => {
+    switch (event.key) {
+      case "ArrowDown":
+        setAutoSuggestionSelected(
+          Math.min(autoSuggestionSelected + 1, autoSuggestions.length - 1)
+        );
+        setSearchInputFromSelectedAutoSuggestion();
+        event.preventDefault();
+        break;
+      case "ArrowUp":
+        setAutoSuggestionSelected(Math.max(autoSuggestionSelected - 1, 0));
+        setSearchInputFromSelectedAutoSuggestion();
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
+  }) as KeyboardEventHandler<HTMLInputElement>;
 
   return (
     <div className={props.className}>
@@ -67,7 +105,10 @@ export default function SearchBar(props: SearchBarProps) {
           type="search"
           ref={searchBoxRef}
           className="outline-2 outline-red-400"
-          onChange={handleInputChange}
+          onChange={(event) => updateAutoSuggestions(event.target.value)}
+          onFocus={() => setSearchHasFocus(true)}
+          onBlur={() => setSearchHasFocus(false)}
+          onKeyDown={handleSearchKeyDown}
         />
         <button
           type="button"
@@ -80,14 +121,29 @@ export default function SearchBar(props: SearchBarProps) {
           Search
         </button>
       </div>
-      {autoSuggestions.length > 0 ? (
+      {autoSuggestions.length > 0 && searchHasFocus ? (
         <div className="absolute">
           <div className={props.autoSuggestClassName || "border-1 bg-white"}>
-            {autoSuggestions.map((cityData) => (
-              <div
-                key={cityData.name}
-              >{`${cityData.name}, ${cityData["country code"]}`}</div>
-            ))}
+            {autoSuggestions.map((cityData, index) => {
+              const query = createAutoSuggestQueryFromCityDataRow(cityData);
+              return (
+                <div
+                  className={
+                    index == autoSuggestionSelected
+                      ? "bg-blue-50 text-white"
+                      : ""
+                  }
+                  key={cityData.name}
+                  onClick={() =>
+                    searchBoxRef.current &&
+                    (searchBoxRef.current.value = query) &&
+                    updateAutoSuggestions(query)
+                  }
+                >
+                  {query}
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : null}
