@@ -7,6 +7,14 @@ import { CityDataRow } from "../geodata/geodata-types";
 
 export interface SearchBarProps {
   autoSuggestLimit?: number;
+  /**
+   * replace the `className` on main div
+   */
+  className?: string;
+  /**
+   * replace the `className` on autoComplete div
+   */
+  classNameAutoComplete?: string;
 }
 
 export default function SearchBar(props: SearchBarProps) {
@@ -23,7 +31,7 @@ export default function SearchBar(props: SearchBarProps) {
   }) as ChangeEventHandler<HTMLInputElement>;
 
   return (
-    <div>
+    <div className={props.className}>
       <div>
         <input type="search" ref={searchBoxRef} onChange={handleInputChange} />
         <button
@@ -34,12 +42,14 @@ export default function SearchBar(props: SearchBarProps) {
         </button>
       </div>
       {autoSuggestions.length > 0 ? (
-        <div className="border-1 inline-block">
-          {autoSuggestions.map((cityData) => (
-            <div
-              key={cityData.name}
-            >{`${cityData.name}, ${cityData["country code"]}`}</div>
-          ))}
+        <div className="absolute">
+          <div className={props.classNameAutoComplete || "border-1 bg-white"}>
+            {autoSuggestions.map((cityData) => (
+              <div
+                key={cityData.name}
+              >{`${cityData.name}, ${cityData["country code"]}`}</div>
+            ))}
+          </div>
         </div>
       ) : null}
     </div>
