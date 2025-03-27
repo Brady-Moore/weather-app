@@ -1,20 +1,20 @@
-import { timeFormat } from "./string";
+import { formatTime } from "./formatTime";
 
-describe("timeFormat", () => {
+describe("formatTime", () => {
   test("returns a valid time string without leading 0's or seconds", () => {
-    expect(timeFormat("09:12:32")).toBe("9:12");
-    expect(timeFormat("11:22:42")).toBe("11:22");
+    expect(formatTime("09:12:32")).toBe("9:12");
+    expect(formatTime("11:22:42")).toBe("11:22");
   });
 
   test("returns the same string when it's not a expected time string format (##:##:##)", () => {
     expect(() => {
-      timeFormat("abcdefgh");
+      formatTime("abcdefgh");
     }).not.toThrow();
     expect(() => {
-      timeFormat("9:25");
+      formatTime("9:25");
     }).not.toThrow();
     expect(() => {
-      timeFormat("");
+      formatTime("");
     }).not.toThrow();
   });
 });
