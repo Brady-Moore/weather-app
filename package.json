@@ -14,9 +14,10 @@
     "prettier:check": "prettier --check ."
   },
   "dependencies": {
-    "next": "15.2.2",
+    "next": "^15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "rocketicons": "^0.2.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
