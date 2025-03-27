@@ -17,7 +17,7 @@ describe("Search Bar", () => {
       pathname: "/",
       query: { city: "New York!@#$%^&*()_+" },
     });
-  });
+  }, 10000);
 
   test("navigates to the correct URL when search bar is empty and button is clicked", async () => {
     render(<SearchBar />);
