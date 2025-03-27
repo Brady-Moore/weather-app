@@ -31,16 +31,25 @@ function buildCitiesTrie(data: CityDataRow[]) {
 let cityData: CityDataRow[] | undefined;
 let citiesTrie: TrieSearch<CityDataRow> | undefined;
 
-export async function cityLoadIfNeeded() {
-  if (!cityData) {
+export async function cityDataIsLoaded() {
+  return !!cityData && !!citiesTrie;
+}
+
+export async function cityDataLoadIfNeeded() {
+  if (!(await cityDataIsLoaded())) {
     cityData = await buildCitiesFromFileAsync();
-  }
-  if (!citiesTrie) {
     citiesTrie = buildCitiesTrie(cityData);
+    return true;
   }
+  return false;
+}
+
+export async function cityDataUnload() {
+  cityData = undefined;
+  citiesTrie = undefined;
 }
 
 export async function citySearch(query: string) {
-  await cityLoadIfNeeded();
+  await cityDataLoadIfNeeded();
   return citiesTrie?.search(query) || [];
 }
