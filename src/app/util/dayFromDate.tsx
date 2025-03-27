@@ -8,6 +8,6 @@ const days = [
   "Saturday",
 ];
 
-export const dayFromDate = (datetime: string) => {
+export default function dayFromDate(datetime: string) {
   return days[new Date(datetime).getDay()];
-};
+}

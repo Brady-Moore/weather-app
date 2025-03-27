@@ -1,4 +1,4 @@
-import { dayFromDate } from "./dayFromDate";
+import dayFromDate from "./dayFromDate";
 
 describe("dayFromDate", () => {
   test("returns the correct day of the week as a string", () => {
