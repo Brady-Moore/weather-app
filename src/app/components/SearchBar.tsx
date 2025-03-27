@@ -4,7 +4,11 @@ import { useRouter } from "next/navigation";
 import { ChangeEventHandler, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
 
-export default function SearchBar() {
+export interface SearchBarProps {
+  autoSuggestLimit?: number;
+}
+
+export default function SearchBar(props: SearchBarProps) {
   const router = useRouter();
   const searchBoxRef = useRef<HTMLInputElement>(null);
   const [autoSuggestions, setAutoSuggestions] = useState<string[]>([]);
@@ -30,7 +34,7 @@ export default function SearchBar() {
       </div>
       {autoSuggestions.length > 0 ? (
         <div className="border-1 inline-block">
-          {autoSuggestions.map((sug) => (
+          {autoSuggestions.slice(0, props.autoSuggestLimit).map((sug) => (
             <div key={sug}>{sug}</div>
           ))}
         </div>

@@ -23,7 +23,7 @@ export default async function Home({
         : undefined;
   return (
     <div>
-      <SearchBar />
+      <SearchBar autoSuggestLimit={10} />
       {weatherDataResponse?.error ? (
         <ErrorMessage error={weatherDataResponse.error} />
       ) : null}
