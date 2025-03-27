@@ -6,14 +6,6 @@ import ErrorMessage from "./components/ErrorMessage";
 import FeelsLikeCard from "./components/FeelsLikeCard";
 import HumidityCard from "./components/HumidityCard";
 
-const feelsLikeDescription = (temp: number, feelslike: number) => {
-  return temp > feelslike
-    ? "Feels cooler than the actual temperature"
-    : temp < feelslike
-      ? "Feels warmer than the actal temperature"
-      : "Feels about the same as the actual temperature";
-};
-
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
