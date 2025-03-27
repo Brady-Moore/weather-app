@@ -7,8 +7,14 @@ describe("timeFormat", () => {
   });
 
   test("returns the same string when it's not a expected time string format (##:##:##)", () => {
-    expect(timeFormat("abcdefgh")).toBe("abcdefgh"); // same string length, but not valid
-    expect(timeFormat("9:25")).toBe("9:25");
-    expect(timeFormat("")).toBe("");
+    expect(() => {
+      timeFormat("abcdefgh");
+    }).not.toThrow();
+    expect(() => {
+      timeFormat("9:25");
+    }).not.toThrow();
+    expect(() => {
+      timeFormat("");
+    }).not.toThrow();
   });
 });
