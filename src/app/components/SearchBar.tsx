@@ -1,16 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import {
-  KeyboardEventHandler,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
 import { CityDataRow } from "../geodata/geodata-types";
-import { sleep } from "../util/timers";
 
 type AutoSuggestSort = "name" | "asciiname" | "population";
 
