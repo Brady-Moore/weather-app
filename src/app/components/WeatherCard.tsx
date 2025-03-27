@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { IconType } from "rocketicons";
 import CardBorder from "./CardBorder";
 
-interface WeatherCardProps {
+export interface WeatherCardProps {
   icon: ReactNode;
   title: string;
   info: number | string;
