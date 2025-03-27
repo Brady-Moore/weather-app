@@ -10,12 +10,12 @@ describe("Search Bar", () => {
     render(<SearchBar />);
     const searchBox = screen.getByRole("searchbox") as HTMLInputElement;
     const searchButton = screen.getByRole("button");
-    await userEvent.type(searchBox, "New York");
+    await userEvent.type(searchBox, "New York!@#$%^&*()_+");
     await userEvent.click(searchButton);
     expect(mockRouter).toMatchObject({
-      asPath: "/?city=New+York",
+      asPath: "/?city=New+York%21%40%23%24%25%5E%26*%28%29_%2B",
       pathname: "/",
-      query: { city: "New York" },
+      query: { city: "New York!@#$%^&*()_+" },
     });
   });
 

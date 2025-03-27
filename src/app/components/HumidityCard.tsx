@@ -2,7 +2,7 @@ import { roundNumber } from "../util/math";
 import WeatherCard from "./WeatherCard";
 import { WiHumidity } from "rocketicons/wi";
 
-interface HumidityCardProps {
+export interface HumidityCardProps {
   dew: number;
   humidity: number;
 }
