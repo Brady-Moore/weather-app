@@ -2,8 +2,13 @@ import { render, screen } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 import mockRouter from "next-router-mock";
 import userEvent from "@testing-library/user-event";
+import { cityDataLoadIfNeeded } from "../geodata/geodata";
 
 jest.mock("next/navigation", () => require("next-router-mock"));
+
+beforeEach(() => {
+  cityDataLoadIfNeeded("/src/app/geodata/cities15000.sample.txt");
+});
 
 describe("Search Bar", () => {
   test("navigates to the correct encoded URL when Search button is clicked", async () => {
@@ -17,7 +22,7 @@ describe("Search Bar", () => {
       pathname: "/",
       query: { city: "New York!@#$%^&*()_+" },
     });
-  }, 10000);
+  });
 
   test("navigates to the correct URL when search bar is empty and button is clicked", async () => {
     render(<SearchBar />);
@@ -38,15 +43,15 @@ describe("Search Bar", () => {
   });
 
   test("renders autosuggest when query length >= 2 is entered", async () => {
-    const { queryByText, getByRole } = render(<SearchBar />);
+    const { queryByText, getByRole, getByText } = render(<SearchBar />);
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    expect(queryByText("Seattle, US")).toBeFalsy();
-    await userEvent.type(searchBox, "S");
-    expect(queryByText("Seattle, US")).toBeFalsy();
-    await userEvent.type(searchBox, "e");
-    expect(queryByText("Seattle, US")).toBeTruthy();
-    await userEvent.type(searchBox, "a");
-    expect(queryByText("Seattle, US")).toBeTruthy();
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
+    await userEvent.type(searchBox, "U");
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
+    await userEvent.type(searchBox, "m");
+    getByText("Umm Suqaym, AE");
+    await userEvent.type(searchBox, "m");
+    expect(queryByText("Umm Suqaym, AE")).toBeTruthy();
   });
 
   test("renders autosuggest with limited count", async () => {
@@ -58,9 +63,9 @@ describe("Search Bar", () => {
       />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Seattle, US")).toBeTruthy();
-    expect(queryByText("Southend-on-Sea, GB")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Al Quwain City, AE")).toBeTruthy();
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 
   test("renders autosuggest with ascending name order by default", async () => {
@@ -68,9 +73,9 @@ describe("Search Bar", () => {
       <SearchBar autoSuggestLimit={1} />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Bexhill-on-Sea, GB")).toBeTruthy();
-    expect(queryByText("Seattle, US")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Al Quwain City, AE")).toBeTruthy();
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 
   test("renders autosuggest with ascending name order", async () => {
@@ -78,9 +83,9 @@ describe("Search Bar", () => {
       <SearchBar autoSuggestLimit={1} autoSuggestSort="name" />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Bexhill-on-Sea, GB")).toBeTruthy();
-    expect(queryByText("Seattle, US")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Al Quwain City, AE")).toBeTruthy();
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 
   test("renders autosuggest with ascending asciiname order", async () => {
@@ -88,9 +93,9 @@ describe("Search Bar", () => {
       <SearchBar autoSuggestLimit={1} autoSuggestSort="asciiname" />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Bexhill-on-Sea, GB")).toBeTruthy();
-    expect(queryByText("Seattle, US")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Al Quwain City, AE")).toBeTruthy();
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 
   test("renders autosuggest with ascending population order", async () => {
@@ -98,23 +103,9 @@ describe("Search Bar", () => {
       <SearchBar autoSuggestLimit={1} autoSuggestSort="population" />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Seagoville, US")).toBeTruthy();
-    expect(queryByText("Seattle, US")).toBeFalsy();
-  });
-
-  test("renders autosuggest with descending population order", async () => {
-    const { queryByText, getByRole } = render(
-      <SearchBar
-        autoSuggestLimit={1}
-        autoSuggestSort="population"
-        autoSuggestSortDesc
-      />
-    );
-    const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Seattle, US")).toBeTruthy();
-    expect(queryByText("Seagoville, US")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Suqaym, AE")).toBeTruthy();
+    expect(queryByText("Umm Al Quwain City, AE")).toBeFalsy();
   });
 
   test("renders autosuggest with descending name order", async () => {
@@ -126,9 +117,9 @@ describe("Search Bar", () => {
       />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Southend-on-Sea, GB")).toBeTruthy();
-    expect(queryByText("Seattle, US")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Suqaym, AE")).toBeTruthy();
+    expect(queryByText("Umm Al Quwain City, AE")).toBeFalsy();
   });
 
   test("renders autosuggest with descending asciiname order", async () => {
@@ -140,8 +131,25 @@ describe("Search Bar", () => {
       />
     );
     const searchBox = getByRole("searchbox") as HTMLInputElement;
-    await userEvent.type(searchBox, "Sea");
-    expect(queryByText("Southend-on-Sea, GB")).toBeTruthy();
-    expect(queryByText("Seattle, US")).toBeFalsy();
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Suqaym, AE")).toBeTruthy();
+    expect(queryByText("Umm Al Quwain City, AE")).toBeFalsy();
+  });
+
+  test("renders autosuggest with descending population order", async () => {
+    const { queryByText, getByRole } = render(
+      <SearchBar
+        autoSuggestLimit={1}
+        autoSuggestSort="population"
+        autoSuggestSortDesc
+      />
+    );
+    const searchBox = getByRole("searchbox") as HTMLInputElement;
+    await userEvent.type(searchBox, "Umm");
+    expect(queryByText("Umm Al Quwain City, AE")).toBeTruthy();
+    expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 });
+
+// Umm Al Quwain City, AE
+// Umm Suqaym, AE
