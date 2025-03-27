@@ -63,7 +63,12 @@ export default function SearchBar(props: SearchBarProps) {
   return (
     <div className={props.className}>
       <div>
-        <input type="search" ref={searchBoxRef} onChange={handleInputChange} />
+        <input
+          type="search"
+          ref={searchBoxRef}
+          className="outline-2 outline-red-400"
+          onChange={handleInputChange}
+        />
         <button
           type="button"
           onClick={() =>
