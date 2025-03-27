@@ -38,6 +38,10 @@ export interface SearchBarProps {
    * replace the `className` on autoSuggest div
    */
   autoSuggestClassName?: string;
+  /**
+   * replace the `className` on autoSuggest selected div
+   */
+  autoSuggestSelectedClassName?: string;
   autoSuggestLimit?: number;
   autoSuggestSort?: AutoSuggestSort;
   /**
@@ -123,14 +127,15 @@ export default function SearchBar(props: SearchBarProps) {
       </div>
       {autoSuggestions.length > 0 && searchHasFocus ? (
         <div className="absolute">
-          <div className={props.autoSuggestClassName || "border-1 bg-white"}>
+          <div className={props.autoSuggestClassName ?? "border-1 bg-white"}>
             {autoSuggestions.map((cityData, index) => {
               const query = createAutoSuggestQueryFromCityDataRow(cityData);
               return (
                 <div
                   className={
                     index == autoSuggestionSelected
-                      ? "bg-blue-50 text-white"
+                      ? (props.autoSuggestSelectedClassName ??
+                        "bg-blue-950 text-white")
                       : ""
                   }
                   key={cityData.name}
