@@ -6,8 +6,8 @@ import { cityDataLoadIfNeeded } from "../geodata/geodata";
 
 jest.mock("next/navigation", () => require("next-router-mock"));
 
-beforeEach(() => {
-  cityDataLoadIfNeeded("/src/app/geodata/cities15000.sample.txt");
+beforeEach(async () => {
+  await cityDataLoadIfNeeded("/src/app/geodata/cities15000.sample.txt");
 });
 
 describe("Search Bar", () => {
