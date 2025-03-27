@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { KeyboardEventHandler, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
 import { CityDataRow } from "../geodata/geodata-types";
+import { sleep } from "../util/timers";
 
 type AutoSuggestSort = "name" | "asciiname" | "population";
 
@@ -111,9 +112,36 @@ export default function SearchBar(props: SearchBarProps) {
           className="outline-2 outline-red-400"
           onChange={(event) => updateAutoSuggestions(event.target.value)}
           onFocus={() => setSearchHasFocus(true)}
-          onBlur={() => setSearchHasFocus(false)}
+          onBlur={() => sleep(100).then(() => setSearchHasFocus(false))}
           onKeyDown={handleSearchKeyDown}
         />
+        {autoSuggestions.length > 0 && searchHasFocus ? (
+          <div className="absolute">
+            <div className={props.autoSuggestClassName ?? "border-1 bg-white"}>
+              {autoSuggestions.map((cityData, index) => {
+                const query = createAutoSuggestQueryFromCityDataRow(cityData);
+                return (
+                  <div
+                    className={
+                      index == autoSuggestionSelected
+                        ? (props.autoSuggestSelectedClassName ??
+                          "bg-blue-950 text-white")
+                        : ""
+                    }
+                    key={cityData.name}
+                    onClick={() =>
+                      searchBoxRef.current &&
+                      (searchBoxRef.current.value = query) &&
+                      updateAutoSuggestions(query)
+                    }
+                  >
+                    {query}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
         <button
           type="button"
           onClick={() =>
@@ -125,33 +153,6 @@ export default function SearchBar(props: SearchBarProps) {
           Search
         </button>
       </div>
-      {autoSuggestions.length > 0 && searchHasFocus ? (
-        <div className="absolute">
-          <div className={props.autoSuggestClassName ?? "border-1 bg-white"}>
-            {autoSuggestions.map((cityData, index) => {
-              const query = createAutoSuggestQueryFromCityDataRow(cityData);
-              return (
-                <div
-                  className={
-                    index == autoSuggestionSelected
-                      ? (props.autoSuggestSelectedClassName ??
-                        "bg-blue-950 text-white")
-                      : ""
-                  }
-                  key={cityData.name}
-                  onClick={() =>
-                    searchBoxRef.current &&
-                    (searchBoxRef.current.value = query) &&
-                    updateAutoSuggestions(query)
-                  }
-                >
-                  {query}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
