@@ -2,7 +2,7 @@ import { roundNumber } from "../util/math";
 import WeatherCard from "./WeatherCard";
 import { WiThermometer } from "rocketicons/wi";
 
-interface FeelsLikeCardProps {
+export interface FeelsLikeCardProps {
   temp: number;
   feelslike: number;
 }
