@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ChangeEventHandler, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
+import { CityDataRow } from "../geodata/geodata-types";
 
 export interface SearchBarProps {
   autoSuggestLimit?: number;
@@ -11,13 +12,13 @@ export interface SearchBarProps {
 export default function SearchBar(props: SearchBarProps) {
   const router = useRouter();
   const searchBoxRef = useRef<HTMLInputElement>(null);
-  const [autoSuggestions, setAutoSuggestions] = useState<string[]>([]);
+  const [autoSuggestions, setAutoSuggestions] = useState<CityDataRow[]>([]);
 
   const handleInputChange = (async (event) => {
     setAutoSuggestions(
-      (await citySearch(event.target.value)).map(
-        (cityRow) => `${cityRow.name}, ${cityRow["country code"]}`
-      )
+      (await citySearch(event.target.value))
+        .sort((a, b) => Number(BigInt(b.population) - BigInt(a.population)))
+        .slice(0, props.autoSuggestLimit)
     );
   }) as ChangeEventHandler<HTMLInputElement>;
 
@@ -34,8 +35,10 @@ export default function SearchBar(props: SearchBarProps) {
       </div>
       {autoSuggestions.length > 0 ? (
         <div className="border-1 inline-block">
-          {autoSuggestions.slice(0, props.autoSuggestLimit).map((sug) => (
-            <div key={sug}>{sug}</div>
+          {autoSuggestions.map((cityData) => (
+            <div
+              key={cityData.name}
+            >{`${cityData.name}, ${cityData["country code"]}`}</div>
           ))}
         </div>
       ) : null}
