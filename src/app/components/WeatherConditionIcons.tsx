@@ -23,3 +23,9 @@ export const weatherConditionIcons = {
 };
 
 export type WeatherIconKey = keyof typeof weatherConditionIcons;
+
+export const weatherIconKeys = Object.keys(weatherConditionIcons);
+
+export function isWeatherIconKey(input: string): input is WeatherIconKey {
+  return weatherIconKeys.some((key) => key === input);
+}

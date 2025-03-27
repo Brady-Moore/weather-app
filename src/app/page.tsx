@@ -13,6 +13,11 @@ import PrecipitationCard from "./components/PrecipitationCard";
 import SunsetCard from "./components/SunsetCard";
 import WindCard from "./components/WindCard";
 import CurrentConditionsCard from "./components/CurrentConditionsCard";
+import {
+  isWeatherIconKey,
+  WeatherIconKey,
+  weatherIconKeys,
+} from "./components/WeatherConditionIcons";
 
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -51,7 +56,13 @@ export default async function Home({ searchParams }: HomeProps) {
               currentTemp={weatherDataResponse.data.currentConditions.temp}
               feelslike={weatherDataResponse.data.days[0].windspeed}
               conditions={weatherDataResponse.data.currentConditions.conditions}
-              icon={weatherDataResponse.data.currentConditions.icon}
+              icon={
+                isWeatherIconKey(
+                  weatherDataResponse.data.currentConditions.icon
+                )
+                  ? weatherDataResponse.data.currentConditions.icon
+                  : "snow"
+              }
               resolvedAddress={weatherDataResponse.data.resolvedAddress}
               tempmax={weatherDataResponse.data.days[0].tempmax}
               tempmin={weatherDataResponse.data.days[0].tempmin}
