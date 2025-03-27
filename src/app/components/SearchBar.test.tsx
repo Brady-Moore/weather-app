@@ -150,6 +150,3 @@ describe("Search Bar", () => {
     expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 });
-
-// Umm Al Quwain City, AE
-// Umm Suqaym, AE
