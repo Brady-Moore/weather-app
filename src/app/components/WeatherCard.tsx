@@ -4,7 +4,7 @@ import CardBorder from "./CardBorder";
 interface WeatherCardProps {
   icon: ReactNode;
   title: string;
-  info: number | string;
+  info?: number | string;
   description?: string;
   children?: ReactNode;
 }
@@ -18,6 +18,7 @@ export default function WeatherCard(props: WeatherCardProps) {
         </div>
         <div>{props.info}</div>
         <div>{props.description}</div>
+        <div>{props.children}</div>
       </CardBorder>
     </div>
   );

@@ -10,6 +10,7 @@ import UVIndexCard from "./components/UVIndexCard";
 import PressureCard from "./components/PressureCard";
 import PrecipitationCard from "./components/PrecipitationCard";
 import SunsetCard from "./components/SunsetCard";
+import WindCard from "./components/WindCard";
 
 const feelsLikeDescription = (temp: number, feelslike: number) => {
   return temp > feelslike
@@ -64,6 +65,11 @@ export default async function Home({ searchParams }: HomeProps) {
             <SunsetCard
               sunset={weatherDataResponse.data.days[0].sunset}
               tomorrowSunrise={weatherDataResponse.data.days[1].sunrise}
+            />
+            <WindCard
+              windspeed={weatherDataResponse.data.days[0].windspeed}
+              windgust={weatherDataResponse.data.days[0].windgust}
+              winddir={weatherDataResponse.data.days[0].winddir}
             />
           </div>
         ) : null}
