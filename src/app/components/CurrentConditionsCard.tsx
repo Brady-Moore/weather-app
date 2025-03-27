@@ -28,7 +28,7 @@ export default function CurrentConditionsCard(
         </span>
       </div>
       <div>
-        {props.currentTemp}°{" "}
+        {props.currentTemp}°
         <WeatherIcon
           data-testid={props.icon}
           className="size-32 fill-amber-800"
