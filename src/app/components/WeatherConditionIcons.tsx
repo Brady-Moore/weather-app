@@ -11,15 +11,15 @@ import {
 } from "rocketicons/wi";
 
 export const weatherConditionIcons = {
-  snow: <WiSnow data-testid="snow" />,
-  rain: <WiRain data-testid="rain" />,
-  fog: <WiFog data-testid="fog" />,
-  wind: <WiWindy data-testid="wind" />,
-  cloudy: <WiCloudy data-testid="cloudy" />,
-  "partly-cloudy-day": <WiDayCloudy data-testid="partly-cloudy-day" />,
-  "partly-cloudy-night": (
-    <WiNightAltPartlyCloudy data-testid="partly-cloudy-night" />
-  ),
-  "clear-day": <WiDaySunny data-testid="clear-day" />,
-  "clear-night": <WiNightClear data-testid="clear-night" />,
+  snow: WiSnow,
+  rain: WiRain,
+  fog: WiFog,
+  wind: WiWindy,
+  cloudy: WiCloudy,
+  "partly-cloudy-day": WiDayCloudy,
+  "partly-cloudy-night": WiNightAltPartlyCloudy,
+  "clear-day": WiDaySunny,
+  "clear-night": WiNightClear,
 };
+
+export type WeatherIconKey = keyof typeof weatherConditionIcons;
