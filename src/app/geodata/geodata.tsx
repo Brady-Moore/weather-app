@@ -6,11 +6,10 @@ import { Options } from "csv-parser";
 import TrieSearch from "trie-search";
 import { cityDataHeaders, CityDataRow } from "./geodata-types";
 
-async function buildCitiesFromFileAsync() {
-  const file = await fs.readFile(
-    process.cwd() + "/src/app/geodata/cities15000.txt",
-    "utf8"
-  );
+const citiesFilePathDefault = "/src/app/geodata/cities15000.txt";
+
+async function buildCitiesFromFileAsync(filepath: string) {
+  const file = await fs.readFile(process.cwd() + filepath, "utf8");
   const options = {
     headers: cityDataHeaders,
     separator: "\t",
@@ -35,9 +34,11 @@ export async function cityDataIsLoaded() {
   return !!cityData && !!citiesTrie;
 }
 
-export async function cityDataLoadIfNeeded() {
+export async function cityDataLoadIfNeeded(
+  filepath: string = citiesFilePathDefault
+) {
   if (!(await cityDataIsLoaded())) {
-    cityData = await buildCitiesFromFileAsync();
+    cityData = await buildCitiesFromFileAsync(filepath);
     citiesTrie = buildCitiesTrie(cityData);
     return true;
   }
