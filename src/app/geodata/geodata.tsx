@@ -6,7 +6,7 @@ import { Options } from "csv-parser";
 import TrieSearch from "trie-search";
 import { cityDataHeaders, CityDataRow } from "./geodata-types";
 
-export const citiesFilePathDefault = "/src/app/geodata/cities15000.txt";
+const citiesFilePathDefault = "/src/app/geodata/cities15000.txt";
 
 async function buildCitiesFromFileAsync(filepath: string) {
   const file = await fs.readFile(process.cwd() + filepath, "utf8");
