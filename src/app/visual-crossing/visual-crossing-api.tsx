@@ -10,25 +10,25 @@ export interface WeatherDataDay {
   feelslike: number; // eg. 58.2;
   dew: number; // eg. 33.5
   humidity: number; // eg. 44.2
-  // precip: 0;
+  precip: number; // eg. 1.1
   // precipprob: 0;
   // precipcover: 0;
-  // preciptype: string[] | null; // eg. ["rain"];
+  preciptype: string[] | null; // eg. ["rain"];
   // snow: 0;
   // snowdepth: 0;
-  // windgust: 9.2;
-  // windspeed: 4.9;
-  // winddir: 42.7;
-  // pressure: 1022.5;
+  windgust: number; // eg. 9.2
+  windspeed: number; // eg. 4.9
+  winddir: number; // eg. 42.7
+  pressure: number; // eg. 1022.5
   // cloudcover: 5.7;
-  // visibility: 10;
+  visibility: number; // eg. 10
   // solarradiation: 290;
   // solarenergy: 25.2;
-  // uvindex: 9;
+  uvindex: number; // eg. 9
   // severerisk: 10;
-  // sunrise: "07:42:57";
+  sunrise: string; // eg. "07:42:57"
   // sunriseEpoch: 1742298177;
-  // sunset: "19:47:39";
+  sunset: string; // eg. "19:47:39"
   // sunsetEpoch: 1742341659;
   // moonphase: 0.64;
   conditions: string; // eg "Clear"
@@ -161,7 +161,7 @@ export async function getWeatherData(
   try {
     const encodedCity = encodeURIComponent(city);
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}?unitGroup=us&key=${key}&contentType=json`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}?unitGroup=metric&key=${key}&contentType=json`
     );
     if (!response.ok) {
       return {
