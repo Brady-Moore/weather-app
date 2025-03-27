@@ -2,6 +2,7 @@ import dayFromDate from "../util/dayFromDate";
 import { formatTime } from "../util/formatTime";
 import CardBorder from "./CardBorder";
 import { weatherConditionIcons, WeatherIconKey } from "./WeatherConditionIcons";
+
 export interface CurrentConditionsCardProps {
   date: string;
   time: string;
