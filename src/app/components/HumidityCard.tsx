@@ -7,7 +7,7 @@ interface HumidityCardProps {
   humidity: number;
 }
 
-export default function humidityCard(props: HumidityCardProps) {
+export default function HumidityCard(props: HumidityCardProps) {
   return (
     <WeatherCard
       title="Humidity"
