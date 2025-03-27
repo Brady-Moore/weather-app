@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
 import { CityDataRow } from "../geodata/geodata-types";
+import { HiSearch } from "rocketicons/hi";
 
 type AutoSuggestSort = "name" | "asciiname" | "population";
 
@@ -115,7 +116,7 @@ export default function SearchBar(props: SearchBarProps) {
         <input
           type="search"
           ref={searchBoxRef}
-          className="outline-2 outline-red-400"
+          className="outline-2 outline-red-400 mx-5"
           onChange={(event) => updateAutoSuggestions(event.target.value)}
           onKeyDown={handleSearchKeyDown}
         />
@@ -139,16 +140,14 @@ export default function SearchBar(props: SearchBarProps) {
             </div>
           </div>
         ) : null}
-        <button
-          type="button"
+        <HiSearch
+          data-testid="search-button"
           onClick={() =>
             router.push(
               `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
             )
           }
-        >
-          Search
-        </button>
+        />
       </div>
     </div>
   );

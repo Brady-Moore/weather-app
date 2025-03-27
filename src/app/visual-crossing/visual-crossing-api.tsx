@@ -1,6 +1,6 @@
 // https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/#response-section
 export interface WeatherDataDay {
-  // datetime: "2025-03-18";
+  datetime: "2025-03-18"; // eg. "2025-03-18"
   // datetimeEpoch: 1742270400;
   tempmax: number; // eg. 38
   tempmin: number; // eg. 38
@@ -97,10 +97,10 @@ export interface WeatherDataDay {
 }
 
 export interface CurrentConditions {
-  // datetime: "04:50:00";
+  datetime: string; // eg. "04:50:00"
   // datetimeEpoch: 1742287800;
-  // temp: 53.7;
-  // feelslike: 53.7;
+  temp: number; // eg. 53.7
+  feelslike: number; // eg. 53.7
   // humidity: 32.4;
   // dew: 24.9;
   // precip: 0;
@@ -117,8 +117,8 @@ export interface CurrentConditions {
   // solarradiation: 0;
   // solarenergy: 0;
   // uvindex: 0;
-  // conditions: "Clear";
-  // icon: "clear-night";
+  conditions: string; // eg. "Clear"
+  icon: string; // eg. "clear-night"
   // stations: ["KTLH", "0344W", "1080W"];
   // source: "obs";
   // sunrise: "07:42:57";

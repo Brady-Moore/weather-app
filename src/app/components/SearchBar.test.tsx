@@ -6,15 +6,15 @@ import { cityDataLoadIfNeeded } from "../geodata/geodata";
 
 jest.mock("next/navigation", () => require("next-router-mock"));
 
-beforeEach(() => {
-  cityDataLoadIfNeeded("/src/app/geodata/cities15000.sample.txt");
+beforeEach(async () => {
+  await cityDataLoadIfNeeded("/src/app/geodata/cities15000.sample.txt");
 });
 
 describe("Search Bar", () => {
   test("navigates to the correct encoded URL when Search button is clicked", async () => {
     render(<SearchBar />);
     const searchBox = screen.getByRole("searchbox") as HTMLInputElement;
-    const searchButton = screen.getByRole("button");
+    const searchButton = screen.getByTestId("search-button");
     await userEvent.type(searchBox, "New York!@#$%^&*()_+");
     await userEvent.click(searchButton);
     expect(mockRouter).toMatchObject({
@@ -27,7 +27,7 @@ describe("Search Bar", () => {
   test("navigates to the correct URL when search bar is empty and button is clicked", async () => {
     render(<SearchBar />);
     const searchBox = screen.getByRole("searchbox") as HTMLInputElement;
-    const searchButton = screen.getByRole("button");
+    const searchButton = screen.getByTestId("search-button");
     await userEvent.click(searchButton);
     expect(mockRouter).toMatchObject({
       asPath: "/?city=",
@@ -39,7 +39,7 @@ describe("Search Bar", () => {
   test("renders button and textbox", () => {
     render(<SearchBar />);
     screen.getByRole("searchbox");
-    screen.getByRole("button");
+    screen.getByTestId("search-button");
   });
 
   test("renders autosuggest when query length >= 2 is entered", async () => {
@@ -150,6 +150,3 @@ describe("Search Bar", () => {
     expect(queryByText("Umm Suqaym, AE")).toBeFalsy();
   });
 });
-
-// Umm Al Quwain City, AE
-// Umm Suqaym, AE

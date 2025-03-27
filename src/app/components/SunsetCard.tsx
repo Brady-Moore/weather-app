@@ -1,4 +1,4 @@
-import { timeFormat } from "../util/string";
+import { formatTime } from "../util/formatTime";
 import WeatherCard from "./WeatherCard";
 import { LuSunset } from "rocketicons/lu";
 
@@ -8,8 +8,8 @@ interface SunsetCardProps {
 }
 
 export default function SunsetCard(props: SunsetCardProps) {
-  const sunsetNoSec = timeFormat(props.sunset);
-  const tomorrowSunriseNoSec = timeFormat(props.tomorrowSunrise);
+  const sunsetNoSec = formatTime(props.sunset);
+  const tomorrowSunriseNoSec = formatTime(props.tomorrowSunrise);
 
   return (
     <WeatherCard
