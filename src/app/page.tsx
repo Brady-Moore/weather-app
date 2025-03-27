@@ -3,6 +3,7 @@ import SearchBar from "./components/SearchBar";
 import { visualCrossingSampleData } from "./test/sample-data";
 import SampleDataLink from "./components/SampleDataLink";
 import ErrorMessage from "./components/ErrorMessage";
+import { cityDataLoadIfNeeded } from "./geodata/geodata";
 import FeelsLikeCard from "./components/FeelsLikeCard";
 import HumidityCard from "./components/HumidityCard";
 
@@ -11,6 +12,9 @@ interface HomeProps {
 }
 
 export default async function Home({ searchParams }: HomeProps) {
+  // Preload city data for autocomplete
+  await cityDataLoadIfNeeded();
+
   const { city, mode } = await searchParams;
   const weatherDataResponse =
     mode === "sample"
@@ -21,7 +25,11 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <div className="p-5">
-      <SearchBar />
+      <SearchBar
+        autoSuggestLimit={10}
+        autoSuggestSort="population"
+        autoSuggestSortDesc
+      />
       {weatherDataResponse?.error ? (
         <ErrorMessage error={weatherDataResponse.error} />
       ) : null}

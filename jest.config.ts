@@ -12,7 +12,15 @@ const config: Config = {
   testEnvironment: "jsdom",
   // Add more setup options before each test is run
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  transformIgnorePatterns: ["/node_modules/(?!(neat-csv)/)"],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config);
+const configAsync = createJestConfig(config);
+
+// Wrap the config callback so we can post-modify transformIgnorePatterns
+export default async () => {
+  const jestConfig = await configAsync();
+  jestConfig.transformIgnorePatterns = config.transformIgnorePatterns;
+  return jestConfig;
+};
