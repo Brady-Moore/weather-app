@@ -1,7 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { KeyboardEventHandler, useRef, useState } from "react";
+import {
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { citySearch } from "../geodata/geodata";
 import { CityDataRow } from "../geodata/geodata-types";
 import { sleep } from "../util/timers";
@@ -53,6 +59,7 @@ export interface SearchBarProps {
 
 export default function SearchBar(props: SearchBarProps) {
   const router = useRouter();
+  const searchDivRef = useRef<HTMLDivElement>(null);
   const searchBoxRef = useRef<HTMLInputElement>(null);
   const [autoSuggestions, setAutoSuggestions] = useState<CityDataRow[]>([]);
   const [autoSuggestionSelected, setAutoSuggestionSelected] = useState(-1);
@@ -72,7 +79,24 @@ export default function SearchBar(props: SearchBarProps) {
     setAutoSuggestionSelected(-1);
   };
 
-  const setSearchInputFromSelectedAutoSuggestion = () => {
+  const handleSearchKeyDown = ((event) => {
+    switch (event.key) {
+      case "ArrowDown":
+        setAutoSuggestionSelected(
+          Math.min(autoSuggestionSelected + 1, autoSuggestions.length - 1)
+        );
+        event.preventDefault();
+        break;
+      case "ArrowUp":
+        setAutoSuggestionSelected(Math.max(autoSuggestionSelected - 1, 0));
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
+  }) as KeyboardEventHandler<HTMLInputElement>;
+
+  useEffect(() => {
     if (
       searchBoxRef.current &&
       autoSuggestionSelected >= 0 &&
@@ -82,63 +106,43 @@ export default function SearchBar(props: SearchBarProps) {
         autoSuggestions[autoSuggestionSelected]
       );
     }
-  };
-
-  const handleSearchKeyDown = ((event) => {
-    switch (event.key) {
-      case "ArrowDown":
-        setAutoSuggestionSelected(
-          Math.min(autoSuggestionSelected + 1, autoSuggestions.length - 1)
-        );
-        setSearchInputFromSelectedAutoSuggestion();
-        event.preventDefault();
-        break;
-      case "ArrowUp":
-        setAutoSuggestionSelected(Math.max(autoSuggestionSelected - 1, 0));
-        setSearchInputFromSelectedAutoSuggestion();
-        event.preventDefault();
-        break;
-      default:
-        break;
-    }
-  }) as KeyboardEventHandler<HTMLInputElement>;
+  }, [autoSuggestionSelected]);
 
   return (
     <div className={props.className}>
-      <div>
+      <div
+        ref={searchDivRef}
+        tabIndex={-1}
+        onFocus={() => setSearchHasFocus(true)}
+        onBlur={(event) =>
+          !event.relatedTarget?.contains(event.target) &&
+          setSearchHasFocus(false)
+        }
+      >
         <input
           type="search"
           ref={searchBoxRef}
           className="outline-2 outline-red-400"
           onChange={(event) => updateAutoSuggestions(event.target.value)}
-          onFocus={() => setSearchHasFocus(true)}
-          onBlur={() => sleep(100).then(() => setSearchHasFocus(false))}
           onKeyDown={handleSearchKeyDown}
         />
         {autoSuggestions.length > 0 && searchHasFocus ? (
           <div className="absolute">
             <div className={props.autoSuggestClassName ?? "border-1 bg-white"}>
-              {autoSuggestions.map((cityData, index) => {
-                const query = createAutoSuggestQueryFromCityDataRow(cityData);
-                return (
-                  <div
-                    className={
-                      index == autoSuggestionSelected
-                        ? (props.autoSuggestSelectedClassName ??
-                          "bg-blue-950 text-white")
-                        : ""
-                    }
-                    key={cityData.name}
-                    onClick={() =>
-                      searchBoxRef.current &&
-                      (searchBoxRef.current.value = query) &&
-                      updateAutoSuggestions(query)
-                    }
-                  >
-                    {query}
-                  </div>
-                );
-              })}
+              {autoSuggestions.map((cityData, index) => (
+                <div
+                  className={
+                    index == autoSuggestionSelected
+                      ? (props.autoSuggestSelectedClassName ??
+                        "bg-blue-950 text-white")
+                      : ""
+                  }
+                  key={cityData.name}
+                  onClick={() => setAutoSuggestionSelected(index)}
+                >
+                  {createAutoSuggestQueryFromCityDataRow(cityData)}
+                </div>
+              ))}
             </div>
           </div>
         ) : null}
