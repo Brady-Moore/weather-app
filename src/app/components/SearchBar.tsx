@@ -66,7 +66,11 @@ export default function SearchBar(props: SearchBarProps) {
         <input type="search" ref={searchBoxRef} onChange={handleInputChange} />
         <button
           type="button"
-          onClick={() => router.push(`/?city=${searchBoxRef.current?.value}`)}
+          onClick={() =>
+            router.push(
+              `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
+            )
+          }
         >
           Search
         </button>
