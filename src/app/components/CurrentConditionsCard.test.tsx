@@ -5,8 +5,10 @@ describe("CurrentConditionsCard", () => {
   test("displays current conditions weather data properly", () => {
     render(<CurrentConditionsCard />);
     expect(screen.getByText("Sunday")).toBeInTheDocument();
-    expect(screen.getByText("12:39")).toBeInTheDocument();
-    expect(screen.getByText("Tallahassee")).toBeInTheDocument();
+    expect(screen.getByText("As of 12:39")).toBeInTheDocument();
+    expect(
+      screen.getByText("Tallahassee, FL, United States")
+    ).toBeInTheDocument();
     expect(screen.getByText("10°")).toBeInTheDocument();
     expect(screen.getByText("Rain")).toBeInTheDocument();
     expect(screen.getByText("H: 11°")).toBeInTheDocument();
