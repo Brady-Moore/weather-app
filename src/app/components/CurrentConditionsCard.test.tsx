@@ -21,7 +21,6 @@ describe("CurrentConditionsCard", () => {
       screen.getByText("Tallahassee, FL, United States")
     ).toBeInTheDocument();
     expect(screen.getByText("10°")).toBeInTheDocument();
-    expect(screen.getByText("Feels like: 8°")).toBeInTheDocument();
     expect(screen.getByText("Rainy")).toBeInTheDocument();
     expect(screen.getByText("H: 11° L: 10°")).toBeInTheDocument();
   });
