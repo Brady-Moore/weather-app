@@ -19,6 +19,7 @@ import {
   weatherIconKeys,
 } from "./components/WeatherConditionIcons";
 import TenDayForecastCard from "./components/TenDayForecastCard";
+import HourlyForecastCard from "./components/HourlyForecastCard";
 
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -69,6 +70,9 @@ export default async function Home({ searchParams }: HomeProps) {
               tempmin={weatherDataResponse.data.days[0].tempmin}
             />
             <TenDayForecastCard days={weatherDataResponse.data.days} />
+            <HourlyForecastCard
+              hours={weatherDataResponse.data.days[0].hours}
+            />
             <FeelsLikeCard
               temp={weatherDataResponse.data.days[0].temp}
               feelslike={weatherDataResponse.data.days[0].feelslike}
