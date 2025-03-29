@@ -12,7 +12,7 @@ Install dependencies:
 
 ```bash
 # install dependencies from .tool-versions
-# if not using `adsf` they can be installed manually
+# if not using `adsf`, they can be installed manually
 asdf install
 
 # install node modules
