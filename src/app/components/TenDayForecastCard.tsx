@@ -3,7 +3,12 @@ import { roundNumber } from "../util/math";
 import WeatherCard from "./WeatherCard";
 import { WeatherDataDay } from "../visual-crossing/visual-crossing-api";
 import dayFromDate from "../util/dayFromDate";
-import { weatherConditionIcons, WeatherIconKey } from "./WeatherConditionIcons";
+import {
+  isWeatherIconKey,
+  weatherConditionIcons,
+  WeatherIconKey,
+} from "./WeatherConditionIcons";
+import { RxValueNone } from "rocketicons/rx";
 
 interface TenDayForecastCardProps {
   days: WeatherDataDay[];
@@ -17,7 +22,9 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
     >
       <div>
         {props.days.map((day) => {
-          const WeatherIcon = weatherConditionIcons[day.icon as WeatherIconKey];
+          const WeatherIcon = isWeatherIconKey(day.icon)
+            ? weatherConditionIcons[day.icon]
+            : RxValueNone;
 
           return (
             <div key={day.datetime} className="flex justify-between text-sm">
