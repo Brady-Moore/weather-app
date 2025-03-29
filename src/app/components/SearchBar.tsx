@@ -103,7 +103,7 @@ export default function SearchBar(props: SearchBarProps) {
   }, [autoSuggestionSelected]);
 
   return (
-    <div className="p-5">
+    <div className="flex justify-center p-5 text-neutral-50">
       <div
         ref={searchDivRef}
         tabIndex={-1}
@@ -116,19 +116,19 @@ export default function SearchBar(props: SearchBarProps) {
         <input
           type="search"
           ref={searchBoxRef}
-          className="outline-2 outline-red-400"
+          className="outline-2 outline-neutral-700 rounded-md"
           onChange={(event) => updateAutoSuggestions(event.target.value)}
           onKeyDown={handleSearchKeyDown}
         />
         {autoSuggestions.length > 0 && searchHasFocus ? (
           <div className="absolute">
-            <div className={props.autoSuggestClassName ?? "border-1 bg-white"}>
+            <div className={props.autoSuggestClassName ?? "border-1"}>
               {autoSuggestions.map((cityData, index) => (
                 <div
                   className={
                     index == autoSuggestionSelected
                       ? (props.autoSuggestSelectedClassName ??
-                        "bg-blue-950 text-white")
+                        "black text-neutral-50")
                       : ""
                   }
                   key={cityData.name}
