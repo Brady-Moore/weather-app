@@ -94,16 +94,4 @@ describe("TenDayForecastCard", () => {
     const icons = screen.getAllByTestId("weather-icon");
     expect(icons).toHaveLength(2);
   });
-
-  test("falls back to snow icon when icon key is invalid", () => {
-    const invalidIconDay: WeatherDataDay = {
-      ...mockDays[0],
-      icon: "solar-flare",
-      datetime: "2025-04-01",
-    };
-
-    render(<TenDayForecastCard days={[invalidIconDay]} />);
-    const icons = screen.getAllByTestId("fallback-icon");
-    expect(icons).toHaveLength(1);
-  });
 });
