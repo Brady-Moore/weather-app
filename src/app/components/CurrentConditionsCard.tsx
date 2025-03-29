@@ -1,5 +1,6 @@
 import dayFromDate from "../util/dayFromDate";
 import { formatTime } from "../util/formatTime";
+import { roundNumber } from "../util/math";
 import CardBorder from "./CardBorder";
 import { weatherConditionIcons, WeatherIconKey } from "./WeatherConditionIcons";
 
@@ -21,24 +22,21 @@ export default function CurrentConditionsCard(
   const WeatherIcon = weatherConditionIcons[props.icon];
   return (
     <CardBorder>
-      <div className="flex justify-between">
-        <span>{props.resolvedAddress}</span>
-        <span>
-          As of {formatTime(props.time)}, {dayFromDate(props.date)}
-        </span>
-      </div>
-      <div>
-        {props.currentTemp}°
-        <WeatherIcon
-          data-testid={props.icon}
-          className="size-32 fill-amber-800"
-        />
-      </div>
-      <div>Feels like: {props.feelslike}°</div>
-      <div>{dayFromDate(props.date)}</div>
-      <div>{props.conditions}</div>
-      <div>
-        H: {props.tempmax}° L: {props.tempmin}°
+      <div className="bg-neutral-950 rounded-sm text-neutral-50">
+        <div className="flex justify-between ">
+          <span>{props.resolvedAddress}</span>
+          <span className="text-neutral-500">
+            As of {formatTime(props.time)}, {dayFromDate(props.date)}
+          </span>
+        </div>
+        <div>
+          {props.currentTemp}°
+          <WeatherIcon data-testid={props.icon} className="size-16 inline" />
+        </div>
+        <div>{props.conditions}</div>
+        <div className="text-neutral-500">
+          H: {roundNumber(props.tempmax)}° L: {roundNumber(props.tempmin)}°
+        </div>
       </div>
     </CardBorder>
   );

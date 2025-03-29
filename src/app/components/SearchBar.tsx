@@ -103,7 +103,7 @@ export default function SearchBar(props: SearchBarProps) {
   }, [autoSuggestionSelected]);
 
   return (
-    <div className={props.className}>
+    <div className="p-5">
       <div
         ref={searchDivRef}
         tabIndex={-1}
@@ -116,7 +116,7 @@ export default function SearchBar(props: SearchBarProps) {
         <input
           type="search"
           ref={searchBoxRef}
-          className="outline-2 outline-red-400 mx-5"
+          className="outline-2 outline-red-400"
           onChange={(event) => updateAutoSuggestions(event.target.value)}
           onKeyDown={handleSearchKeyDown}
         />
@@ -142,6 +142,7 @@ export default function SearchBar(props: SearchBarProps) {
         ) : null}
         <HiSearch
           data-testid="search-button"
+          className="size-5 inline ml-1"
           onClick={() =>
             router.push(
               `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`

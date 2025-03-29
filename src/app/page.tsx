@@ -40,7 +40,6 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <div>
       <SearchBar
-        className="grid justify-end p-5"
         autoSuggestLimit={10}
         autoSuggestSort="population"
         autoSuggestSortDesc

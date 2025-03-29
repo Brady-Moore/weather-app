@@ -12,13 +12,15 @@ export default function WeatherCard(props: WeatherCardProps) {
   return (
     <div>
       <CardBorder>
-        <div>
-          <div className="inline">{props.icon}</div>
-          {props.title}
+        <div className="bg-amber-400 rounded-sm">
+          <div>
+            <div className="inline">{props.icon}</div>
+            {props.title}
+          </div>
+          <div>{props.info}</div>
+          <div>{props.description}</div>
+          <div>{props.children}</div>
         </div>
-        <div>{props.info}</div>
-        <div>{props.description}</div>
-        <div>{props.children}</div>
       </CardBorder>
     </div>
   );
