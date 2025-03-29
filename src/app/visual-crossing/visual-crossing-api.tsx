@@ -1,4 +1,35 @@
 // https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/#response-section
+export interface WeatherDataDayHour {
+  datetime: string; // eg. "12:00:00"
+  //    "datetimeEpoch": 1742486400,
+  temp: number; // eg. 63.9
+  //    "feelslike": 63.9,
+  //    "humidity": 67.48,
+  //    "dew": 53,
+  //    "precip": 0.012,
+  //    "precipprob": 2,
+  //    "snow": 0,
+  //    "snowdepth": 0,
+  //    "preciptype": [
+  //     "rain"
+  //    ],
+  //    "windgust": 23,
+  //    "windspeed": 11.4,
+  //    "winddir": 290,
+  //    "pressure": 1015,
+  //    "visibility": 10.1,
+  //    "cloudcover": 68,
+  //    "solarradiation": 260,
+  //    "solarenergy": 0.9,
+  //    "uvindex": 3,
+  //    "severerisk": 10,
+  //    "conditions": "Partially cloudy",
+  icon: string; // eg. "partly-cloudy-day"
+  //    "stations": null,
+  //    "source": "fcst"
+  //   },
+}
+
 export interface WeatherDataDay {
   datetime: string; // eg. "2025-03-18"
   // datetimeEpoch: 1742270400;
@@ -36,7 +67,7 @@ export interface WeatherDataDay {
   icon: string; // eg ""clear-day""
   // stations: ["K2J9", "KTLH", "KBGE", "1080W"];
   // source: "comb";
-  // "hours": [
+  hours: WeatherDataDayHour[];
   //   {
   //    "datetime": "12:00:00",
   //    "datetimeEpoch": 1742486400,

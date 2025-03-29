@@ -41,6 +41,7 @@ const mockDays: WeatherDataDay[] = [
     sunset: "18:25:00",
     conditions: "Clear",
     icon: "clear-day",
+    hours: [{ datetime: "12:00:00", temp: 11, icon: "clear-day" }],
   },
   {
     datetime: "2025-03-29",
@@ -62,6 +63,7 @@ const mockDays: WeatherDataDay[] = [
     sunset: "18:26:00",
     conditions: "Cloudy",
     icon: "cloudy",
+    hours: [{ datetime: "12:00:00", temp: 11, icon: "clear-day" }],
   },
 ];
 
