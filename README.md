@@ -8,7 +8,18 @@ First, set VISUAL_CROSSING_API_KEY using environment variables.
 VISUAL_CROSSING_API_KEY=YOUR_KEY_HERE
 ```
 
-run the development server:
+Install dependencies:
+
+```bash
+# install dependencies from .tool-versions
+# if not using `adsf`, they can be installed manually
+asdf install
+
+# install node modules
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
