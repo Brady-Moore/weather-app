@@ -121,7 +121,7 @@ export default function SearchBar(props: SearchBarProps) {
           onKeyDown={handleSearchKeyDown}
         />
         {autoSuggestions.length > 0 && searchHasFocus ? (
-          <div className="absolute">
+          <div className="absolute z-10">
             <div className={props.autoSuggestClassName ?? "border-1"}>
               {autoSuggestions.map((cityData, index) => (
                 <div
