@@ -1,6 +1,6 @@
 // https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/#response-section
 export interface WeatherDataDay {
-  datetime: "2025-03-18"; // eg. "2025-03-18"
+  datetime: string; // eg. "2025-03-18"
   // datetimeEpoch: 1742270400;
   tempmax: number; // eg. 38
   tempmin: number; // eg. 38
@@ -161,7 +161,7 @@ export async function getWeatherData(
   try {
     const encodedCity = encodeURIComponent(city);
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}?unitGroup=metric&key=${key}&contentType=json`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}/next10days?unitGroup=metric&key=${key}&contentType=json`
     );
     if (!response.ok) {
       return {
