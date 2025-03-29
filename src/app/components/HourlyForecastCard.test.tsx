@@ -17,22 +17,18 @@ describe("HourlyForecastCard component", () => {
 
   test("renders WeatherCard with correct title and clock icon", () => {
     render(<HourlyForecastCard hours={mockHours} />);
-    // Verify that the WeatherCard's title is rendered.
     expect(screen.getByText("Hourly Forecast")).toBeInTheDocument();
-    // Verify that the clock icon is rendered (FiClock likely renders an <svg> element).
     expect(document.querySelector("svg")).toBeInTheDocument();
   });
 
   test("renders each hourly forecast entry correctly", () => {
     render(<HourlyForecastCard hours={mockHours} />);
 
-    // Check that each hour's formatted time is rendered.
     expect(screen.getByText("12:00")).toBeInTheDocument();
     expect(screen.getByText("13:00")).toBeInTheDocument();
 
-    // Check that the rounded temperatures are rendered correctly.
-    expect(screen.getByText("23°")).toBeInTheDocument(); // Math.round(23.4) === 23
-    expect(screen.getByText("25°")).toBeInTheDocument(); // Math.round(24.6) === 25
+    expect(screen.getByText("23°")).toBeInTheDocument();
+    expect(screen.getByText("25°")).toBeInTheDocument();
 
     const weatherIcons = screen.getAllByTestId("weather-icon");
     expect(weatherIcons.length).toBe(2);
