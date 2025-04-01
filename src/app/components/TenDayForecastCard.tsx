@@ -12,6 +12,7 @@ import { RxValueNone } from "rocketicons/rx";
 
 interface TenDayForecastCardProps {
   days: WeatherDataDay[];
+  className?: string;
 }
 
 export default function TenDayForecastCard(props: TenDayForecastCardProps) {
@@ -19,6 +20,7 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
     <WeatherCard
       title="10-Day Forecast"
       icon={<BiCalendar className="size-5 inline" />}
+      className={props.className}
     >
       <div>
         {props.days.map((day) => {

@@ -25,7 +25,7 @@ export default function FeelsLikeCard(props: FeelsLikeCardProps) {
       title="Feels like"
       icon={
         <WiThermometer
-          className="size-5 inline text-yellow-400"
+          className="size-5 inline"
           data-testid="thermometer-icon"
         />
       }

@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import CardBorder from "./CardBorder";
+import { handleClassName } from "rocketicons/core/utils";
 
 export interface WeatherCardProps {
+  className?: string;
   icon: ReactNode;
   title: string;
   info?: number | string;
@@ -10,18 +12,16 @@ export interface WeatherCardProps {
 }
 export default function WeatherCard(props: WeatherCardProps) {
   return (
-    <div>
-      <CardBorder>
-        <div className="bg-neutral-950 rounded-sm text-neutral-50 px-2 py-1">
-          <div className="mb-2">
-            <div className="inline mr-1">{props.icon}</div>
-            {props.title}
-          </div>
-          <div>{props.info}</div>
-          <div>{props.description}</div>
-          <div>{props.children}</div>
+    <CardBorder className={props.className}>
+      <div className=" rounded-sm text-neutral-50">
+        <div className="mb-2">
+          <div className="inline mr-1">{props.icon}</div>
+          {props.title}
         </div>
-      </CardBorder>
-    </div>
+        <div>{props.info}</div>
+        <div>{props.description}</div>
+        <div>{props.children}</div>
+      </div>
+    </CardBorder>
   );
 }

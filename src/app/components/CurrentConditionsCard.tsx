@@ -8,6 +8,7 @@ import {
 } from "../util/WeatherConditionIcons";
 
 export interface CurrentConditionsCardProps {
+  className?: string;
   date: string;
   time: string;
   currentTemp: number;
@@ -24,7 +25,7 @@ export default function CurrentConditionsCard(
 ) {
   const WeatherIcon = weatherConditionIcons[props.icon];
   return (
-    <CardBorder>
+    <CardBorder className={props.className}>
       <div className="bg-neutral-950 rounded-sm text-neutral-50 px-2 py-1">
         <div className="flex justify-between alig text-sm">
           <span>{props.resolvedAddress}</span>

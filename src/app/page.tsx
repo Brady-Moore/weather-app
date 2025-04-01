@@ -46,8 +46,9 @@ export default async function Home({ searchParams }: HomeProps) {
       {!weatherDataResponse?.data ? <SampleDataLink /> : null}
       <div>
         {weatherDataResponse?.data ? (
-          <div>
+          <div className="grid grid-cols-2">
             <CurrentConditionsCard
+              className="col-span-2"
               date={weatherDataResponse.data.days[0].datetime}
               time={weatherDataResponse.data.currentConditions.datetime}
               currentTemp={weatherDataResponse.data.currentConditions.temp}
@@ -64,9 +65,13 @@ export default async function Home({ searchParams }: HomeProps) {
               tempmax={weatherDataResponse.data.days[0].tempmax}
               tempmin={weatherDataResponse.data.days[0].tempmin}
             />
-            <TenDayForecastCard days={weatherDataResponse.data.days} />
             <HourlyForecastCard
+              className="col-span-2"
               hours={weatherDataResponse.data.days[0].hours}
+            />
+            <TenDayForecastCard
+              className="col-span-2"
+              days={weatherDataResponse.data.days}
             />
             <FeelsLikeCard
               temp={weatherDataResponse.data.days[0].temp}
