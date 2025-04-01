@@ -2,7 +2,10 @@ import dayFromDate from "../util/dayFromDate";
 import { formatTime } from "../util/formatTime";
 import { roundNumber } from "../util/math";
 import CardBorder from "./CardBorder";
-import { weatherConditionIcons, WeatherIconKey } from "./WeatherConditionIcons";
+import {
+  weatherConditionIcons,
+  WeatherIconKey,
+} from "../util/WeatherConditionIcons";
 
 export interface CurrentConditionsCardProps {
   date: string;

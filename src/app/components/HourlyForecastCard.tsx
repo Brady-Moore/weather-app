@@ -1,6 +1,9 @@
 import { roundNumber } from "../util/math";
 import WeatherCard from "./WeatherCard";
-import { weatherConditionIcons, WeatherIconKey } from "./WeatherConditionIcons";
+import {
+  weatherConditionIcons,
+  WeatherIconKey,
+} from "../util/WeatherConditionIcons";
 import { FiClock } from "rocketicons/fi";
 import { WeatherDataDayHour } from "../visual-crossing/visual-crossing-api";
 import { formatTime } from "../util/formatTime";

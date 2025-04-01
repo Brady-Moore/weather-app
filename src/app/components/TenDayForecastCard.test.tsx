@@ -11,7 +11,7 @@ jest.mock("../util/dayFromDate", () => ({
   default: (dateStr: string) => `Day-${dateStr}`,
 }));
 
-jest.mock("./WeatherConditionIcons", () => ({
+jest.mock("../util/WeatherConditionIcons.tsx", () => ({
   weatherConditionIcons: {
     "clear-day": (props: any) => <svg data-testid="weather-icon" {...props} />,
     cloudy: (props: any) => <svg data-testid="weather-icon" {...props} />,

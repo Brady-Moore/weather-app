@@ -7,7 +7,7 @@ import {
   isWeatherIconKey,
   weatherConditionIcons,
   WeatherIconKey,
-} from "./WeatherConditionIcons";
+} from "../util/WeatherConditionIcons";
 import { RxValueNone } from "rocketicons/rx";
 
 interface TenDayForecastCardProps {

@@ -13,7 +13,7 @@ import PrecipitationCard from "./components/PrecipitationCard";
 import SunsetCard from "./components/SunsetCard";
 import WindCard from "./components/WindCard";
 import CurrentConditionsCard from "./components/CurrentConditionsCard";
-import { isWeatherIconKey } from "./components/WeatherConditionIcons";
+import { isWeatherIconKey } from "./util/WeatherConditionIcons";
 import TenDayForecastCard from "./components/TenDayForecastCard";
 import HourlyForecastCard from "./components/HourlyForecastCard";
 

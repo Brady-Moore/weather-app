@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import HourlyForecastCard from "./HourlyForecastCard";
 
-jest.mock("./WeatherConditionIcons", () => ({
+jest.mock("../util/WeatherConditionIcons.tsx", () => ({
   weatherConditionIcons: {
     "clear-day": (props: any) => (
       <div data-testid="weather-icon">Clear Day Icon</div>
