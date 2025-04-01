@@ -26,10 +26,10 @@ export default function CurrentConditionsCard(
   const WeatherIcon = weatherConditionIcons[props.icon];
   return (
     <CardBorder className={props.className}>
-      <div className="bg-neutral-950 rounded-sm text-neutral-50 px-2 py-1">
+      <div className="rounded-sm text-neutral-50 px-2 py-1">
         <div className="flex justify-between alig text-sm">
           <span>{props.resolvedAddress}</span>
-          <span className="text-neutral-500 text-xs">
+          <span className="text-neutral-300 text-xs">
             As of {formatTime(props.time)}, {dayFromDate(props.date)}
           </span>
         </div>
@@ -40,7 +40,7 @@ export default function CurrentConditionsCard(
           <span className="text-lg">{props.conditions}</span>
           <WeatherIcon data-testid={props.icon} className="size-7 inline" />
         </div>
-        <div className="text-neutral-500">
+        <div className="text-neutral-300">
           H: {roundNumber(props.tempmax)}° L: {roundNumber(props.tempmin)}°
         </div>
       </div>

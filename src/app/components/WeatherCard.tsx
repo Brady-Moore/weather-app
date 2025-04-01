@@ -18,8 +18,8 @@ export default function WeatherCard(props: WeatherCardProps) {
           <div className="inline mr-1">{props.icon}</div>
           {props.title}
         </div>
-        <div>{props.info}</div>
-        <div>{props.description}</div>
+        <div className="text-2xl pb-2">{props.info}</div>
+        <div className="text-neutral-300 text-xs pb-0">{props.description}</div>
         <div>{props.children}</div>
       </div>
     </CardBorder>
