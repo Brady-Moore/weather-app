@@ -97,7 +97,7 @@ export default function SearchBar(props: SearchBarProps) {
   }, [autoSuggestionSelected]);
 
   return (
-    <div className={joinClassNames("m-5 text-neutral-50", props.className)}>
+    <div className={joinClassNames("", props.className)}>
       <div
         ref={searchDivRef}
         tabIndex={-1}
@@ -142,9 +142,7 @@ export default function SearchBar(props: SearchBarProps) {
               {autoSuggestions.map((cityData, index) => (
                 <div
                   className={joinClassNames(
-                    index == autoSuggestionSelected
-                      ? "bg-neutral-700 text-neutral-50"
-                      : "",
+                    index == autoSuggestionSelected ? "bg-neutral-700" : "",
                     "px-2 py-1"
                   )}
                   key={cityData.name}

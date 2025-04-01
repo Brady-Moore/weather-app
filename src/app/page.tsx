@@ -16,6 +16,8 @@ import CurrentConditionsCard from "./components/CurrentConditionsCard";
 import { isWeatherIconKey } from "./util/WeatherConditionIcons";
 import TenDayForecastCard from "./components/TenDayForecastCard";
 import HourlyForecastCard from "./components/HourlyForecastCard";
+import { BsGithub } from "rocketicons/bs";
+import Link from "next/link";
 
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -34,7 +36,7 @@ export default async function Home({ searchParams }: HomeProps) {
         : undefined;
 
   return (
-    <div>
+    <div className="flex flex-col gap-8 m-5 mb-7">
       <SearchBar
         autoSuggestLimit={10}
         autoSuggestSort="population"
@@ -46,7 +48,7 @@ export default async function Home({ searchParams }: HomeProps) {
       {!weatherDataResponse?.data ? <SampleDataLink /> : null}
       <div>
         {weatherDataResponse?.data ? (
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 gap-3">
             <CurrentConditionsCard
               className="col-span-2"
               date={weatherDataResponse.data.days[0].datetime}
@@ -103,6 +105,15 @@ export default async function Home({ searchParams }: HomeProps) {
             />
           </div>
         ) : null}
+      </div>
+      <div>
+        <BsGithub className="size-4 inline mr-2" />
+        <Link
+          className="underline"
+          href="https://github.com/Brady-Moore/weather-app"
+        >
+          Repository
+        </Link>
       </div>
     </div>
   );

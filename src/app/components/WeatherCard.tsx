@@ -13,7 +13,7 @@ export interface WeatherCardProps {
 export default function WeatherCard(props: WeatherCardProps) {
   return (
     <CardBorder className={props.className}>
-      <div className=" rounded-sm text-neutral-50">
+      <div className=" rounded-sm">
         <div className="mb-2">
           <div className="inline mr-1">{props.icon}</div>
           {props.title}
