@@ -12,10 +12,7 @@ export default function PressureCard(props: PressureCardProps) {
     <WeatherCard
       title="Pressure"
       icon={
-        <WiBarometer
-          className="size-5 inline text-red-600"
-          data-testid="pressure-icon"
-        />
+        <WiBarometer className="size-5 inline" data-testid="pressure-icon" />
       }
       info={`${pressureRound} hPa`}
     />

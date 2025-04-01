@@ -1,6 +1,6 @@
 import { roundNumber } from "../util/math";
 import WeatherCard from "./WeatherCard";
-import { WiRaindrops } from "rocketicons/wi";
+import { SiRainmeter } from "rocketicons/si";
 
 interface PrecipitationCardProps {
   precip: number;
@@ -14,8 +14,8 @@ export default function PrecipitationCard(props: PrecipitationCardProps) {
     <WeatherCard
       title="Precipitation"
       icon={
-        <WiRaindrops
-          className="size-5 inline text-red-600"
+        <SiRainmeter
+          className="size-5 inline"
           data-testid="precipitation-icon"
         />
       }

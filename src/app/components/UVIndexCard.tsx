@@ -13,12 +13,7 @@ export default function UVIndexCard(props: UVIndexCardProps) {
   return (
     <WeatherCard
       title="UV Index"
-      icon={
-        <HiSun
-          className="size-5 inline text-yellow-400"
-          data-testid="uv-index-icon"
-        />
-      }
+      icon={<HiSun className="size-5 inline" data-testid="uv-index-icon" />}
       info={props.uvindex}
       description={UVIndexDescription(props.uvindex)}
     />
