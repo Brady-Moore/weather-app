@@ -1,4 +1,4 @@
-import { formatTime } from "../util/formatTime";
+import { formatTime } from "../util/format";
 import WeatherCard from "./WeatherCard";
 import { LuSunset } from "rocketicons/lu";
 

@@ -1,5 +1,5 @@
 import dayFromDate from "../util/dayFromDate";
-import { formatTime } from "../util/formatTime";
+import { formatTime } from "../util/format";
 import { roundNumber } from "../util/math";
 import CardBorder from "./CardBorder";
 import {

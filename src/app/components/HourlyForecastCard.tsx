@@ -6,7 +6,7 @@ import {
 } from "../util/WeatherConditionIcons";
 import { FiClock } from "rocketicons/fi";
 import { WeatherDataDayHour } from "../visual-crossing/visual-crossing-api";
-import { formatTime } from "../util/formatTime";
+import { formatTime } from "../util/format";
 
 interface HourlyForecastCardProps {
   className?: string;
