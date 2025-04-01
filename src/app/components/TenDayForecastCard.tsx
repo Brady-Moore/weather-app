@@ -27,11 +27,16 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
             : RxValueNone;
 
           return (
-            <div key={day.datetime} className="flex justify-between text-sm">
-              <span>{dayFromDate(day.datetime)}</span>
-              <WeatherIcon className="size-5" />
-              <span>{roundNumber(day.tempmin)}°</span>
-              <span>{roundNumber(day.tempmax)}°</span>
+            <div
+              key={day.datetime}
+              className="grid grid-cols-4 gap-2 items-center"
+            >
+              <span className="text-left">{dayFromDate(day.datetime)}</span>
+              <div className="flex justify-end">
+                <WeatherIcon className="w-5 h-5" />
+              </div>
+              <span className="text-right">{roundNumber(day.tempmin)}°</span>
+              <span className="text-right">{roundNumber(day.tempmax)}°</span>
             </div>
           );
         })}
