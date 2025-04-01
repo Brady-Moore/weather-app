@@ -1,12 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import HourlyForecastCard from "./HourlyForecastCard";
 
-jest.mock("./WeatherConditionIcons", () => ({
-  weatherConditionIcons: {
-    "clear-day": (props: any) => (
-      <div data-testid="weather-icon">Clear Day Icon</div>
-    ),
-  },
+jest.mock("rocketicons/wi", () => ({
+  WiSnow: () => <svg data-testid="weather-icon" />,
+  WiRain: () => <svg data-testid="weather-icon" />,
+  WiFog: () => <svg data-testid="weather-icon" />,
+  WiWindy: () => <svg data-testid="weather-icon" />,
+  WiCloudy: () => <svg data-testid="weather-icon" />,
+  WiDayCloudy: () => <svg data-testid="weather-icon" />,
+  WiNightAltPartlyCloudy: () => <svg data-testid="weather-icon" />,
+  WiDaySunny: () => <div data-testid="weather-icon">Clear Day Icon</div>,
+  WiNightClear: () => <svg data-testid="weather-icon" />,
 }));
 
 describe("HourlyForecastCard component", () => {
