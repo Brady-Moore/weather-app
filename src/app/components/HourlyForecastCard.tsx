@@ -1,9 +1,14 @@
 import { roundNumber } from "../util/math";
 import WeatherCard from "./WeatherCard";
-import { weatherConditionIcons, WeatherIconKey } from "./WeatherConditionIcons";
+import {
+  isWeatherIconKey,
+  weatherConditionIcons,
+  WeatherIconKey,
+} from "./WeatherConditionIcons";
 import { FiClock } from "rocketicons/fi";
 import { WeatherDataDayHour } from "../visual-crossing/visual-crossing-api";
 import { formatTime } from "../util/formatTime";
+import { RxValueNone } from "rocketicons/rx";
 
 interface HourlyForecastCardProps {
   hours: WeatherDataDayHour[];
@@ -17,8 +22,9 @@ export default function HourlyForecastCard(props: HourlyForecastCardProps) {
     >
       <div>
         {props.hours.map((hour) => {
-          const WeatherIcon =
-            weatherConditionIcons[hour.icon as WeatherIconKey];
+          const WeatherIcon = isWeatherIconKey(hour.icon)
+            ? weatherConditionIcons[hour.icon]
+            : RxValueNone;
 
           return (
             <div key={hour.datetime} className="flex justify-between text-sm">
