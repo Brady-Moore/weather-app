@@ -29,7 +29,7 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
           return (
             <div
               key={day.datetime}
-              className="grid grid-cols-4 gap-2 items-center"
+              className="grid grid-cols-4 gap-2 items-center ml-1.5"
             >
               <span className="text-left">{dayFromDate(day.datetime)}</span>
               <div className="flex justify-end">

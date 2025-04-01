@@ -13,8 +13,8 @@ export default function WeatherCard(props: WeatherCardProps) {
     <div>
       <CardBorder>
         <div className="bg-neutral-950 rounded-sm text-neutral-50 px-2 py-1">
-          <div>
-            <div className="inline">{props.icon}</div>
+          <div className="mb-2">
+            <div className="inline mr-1">{props.icon}</div>
             {props.title}
           </div>
           <div>{props.info}</div>

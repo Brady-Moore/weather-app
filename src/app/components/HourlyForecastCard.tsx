@@ -18,7 +18,7 @@ export default function HourlyForecastCard(props: HourlyForecastCardProps) {
       title="Hourly Forecast"
       icon={<FiClock className="size-4.5 inline" />}
     >
-      <div className="flex space-x-4 overflow-x-scroll w-full scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-950">
+      <div className="flex ml-2 gap-x-4 overflow-x-scroll w-full scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-950">
         {props.hours.map((hour) => {
           const WeatherIcon =
             weatherConditionIcons[hour.icon as WeatherIconKey];
@@ -26,11 +26,11 @@ export default function HourlyForecastCard(props: HourlyForecastCardProps) {
           return (
             <div
               key={hour.datetime}
-              className="flex flex-col text-sm min-w-[60px]"
+              className="flex flex-col text-sm min-w-[60px] gap-y-2"
             >
               <div className="mx-auto">{formatTime(hour.datetime)}</div>
               <WeatherIcon className="size-6 mx-auto" />
-              <div className="mx-auto">{roundNumber(hour.temp)}°</div>
+              <div className="mx-auto mb-2">{roundNumber(hour.temp)}°</div>
             </div>
           );
         })}
