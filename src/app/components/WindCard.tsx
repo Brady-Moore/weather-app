@@ -20,12 +20,7 @@ export default function WindCard(props: WindCardProps) {
   return (
     <WeatherCard
       title="Wind"
-      icon={
-        <FiWind
-          className="size-5 inline text-green-400"
-          data-testid="wind-icon"
-        />
-      }
+      icon={<FiWind className="size-5 inline" data-testid="wind-icon" />}
     >
       <div>
         {windArr.map((item) => (

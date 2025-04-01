@@ -14,12 +14,7 @@ export default function SunsetCard(props: SunsetCardProps) {
   return (
     <WeatherCard
       title="Sunset"
-      icon={
-        <LuSunset
-          className="size-5 inline text-red-400"
-          data-testid="sunset-icon"
-        />
-      }
+      icon={<LuSunset className="size-5 inline" data-testid="sunset-icon" />}
       info={sunsetNoSec}
       description={`Sunrise Tomorrow: ${tomorrowSunriseNoSec}`}
     />

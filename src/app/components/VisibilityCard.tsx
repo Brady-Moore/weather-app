@@ -11,12 +11,7 @@ export default function VisibilityCard(props: VisibilityCardProps) {
   return (
     <WeatherCard
       title="Visibility"
-      icon={
-        <TiEye
-          className="size-5 inline text-yellow-400"
-          data-testid="visibility-icon"
-        />
-      }
+      icon={<TiEye className="size-5 inline" data-testid="visibility-icon" />}
       info={`${visibilityRound} km`}
     />
   );
