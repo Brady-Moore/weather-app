@@ -2,8 +2,6 @@
 
 ![GitHub branch check runs](https://img.shields.io/github/check-runs/Brady-Moore/weather-app/master)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, set VISUAL_CROSSING_API_KEY using environment variables.
@@ -42,6 +40,8 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 To learn more about Next.js, take a look at the following resources:
 
