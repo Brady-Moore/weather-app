@@ -5,6 +5,7 @@ import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { citySearch } from "../geodata/geodata";
 import { CityDataRow } from "../geodata/geodata-types";
 import { HiSearch } from "rocketicons/hi";
+import { joinClassNames } from "../util/format";
 
 type AutoSuggestSort = "name" | "asciiname" | "population";
 
@@ -35,14 +36,6 @@ export interface SearchBarProps {
    * replace the `className` on main div
    */
   className?: string;
-  /**
-   * replace the `className` on autoSuggest div
-   */
-  autoSuggestClassName?: string;
-  /**
-   * replace the `className` on autoSuggest selected div
-   */
-  autoSuggestSelectedClassName?: string;
   autoSuggestLimit?: number;
   autoSuggestSort?: AutoSuggestSort;
   /**
@@ -58,6 +51,7 @@ export default function SearchBar(props: SearchBarProps) {
   const [autoSuggestions, setAutoSuggestions] = useState<CityDataRow[]>([]);
   const [autoSuggestionSelected, setAutoSuggestionSelected] = useState(-1);
   const [searchHasFocus, setSearchHasFocus] = useState(false);
+  const autoSuggestVisible = autoSuggestions.length > 0 && searchHasFocus;
 
   const updateAutoSuggestions = async (query: string) => {
     setAutoSuggestions(
@@ -103,7 +97,7 @@ export default function SearchBar(props: SearchBarProps) {
   }, [autoSuggestionSelected]);
 
   return (
-    <div className={"p-5 text-neutral-50 " + props.className}>
+    <div className={joinClassNames("m-5 text-neutral-50", props.className)}>
       <div
         ref={searchDivRef}
         tabIndex={-1}
@@ -114,17 +108,22 @@ export default function SearchBar(props: SearchBarProps) {
         }
         className="relative"
       >
-        <div className="flex outline-2 outline-neutral-700 rounded-md">
+        <div
+          className={joinClassNames(
+            "flex border-2 border-neutral-700 p-3 gap-3",
+            autoSuggestVisible ? "rounded-t-md" : "rounded-md"
+          )}
+        >
           <input
             type="search"
             ref={searchBoxRef}
-            className="grow outline-none px-2 py-1"
+            className="grow outline-none py-1"
             onChange={(event) => updateAutoSuggestions(event.target.value)}
             onKeyDown={handleSearchKeyDown}
           />
           <HiSearch
             data-testid="search-button"
-            className="size-8 inline"
+            className="inline-block size-8"
             onClick={() =>
               router.push(
                 `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
@@ -133,22 +132,21 @@ export default function SearchBar(props: SearchBarProps) {
           />
         </div>
 
-        {autoSuggestions.length > 0 && searchHasFocus ? (
-          <div className="absolute w-full ">
+        {autoSuggestVisible ? (
+          <div className="absolute w-full">
             <div
               className={
-                "border-2 border-neutral-700 bg-neutral-950 border-t-0 " +
-                props.autoSuggestClassName
+                "border-2 border-neutral-700 bg-black border-t-0 rounded-b-md"
               }
             >
               {autoSuggestions.map((cityData, index) => (
                 <div
-                  className={
-                    (index == autoSuggestionSelected
-                      ? "bg-neutral-700 text-neutral-50" +
-                        props.autoSuggestSelectedClassName
-                      : "") + " px-2 py-1"
-                  }
+                  className={joinClassNames(
+                    index == autoSuggestionSelected
+                      ? "bg-neutral-700 text-neutral-50"
+                      : "",
+                    "px-2 py-1"
+                  )}
                   key={cityData.name}
                   onClick={() => setAutoSuggestionSelected(index)}
                 >
