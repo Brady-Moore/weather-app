@@ -15,7 +15,7 @@ export default function HourlyForecastCard(props: HourlyForecastCardProps) {
       title="Hourly Forecast"
       icon={<FiClock className="size-4.5 inline" />}
     >
-      <div className="flex space-x-4 overflow-x-scroll w-full">
+      <div className="flex space-x-4 overflow-x-scroll w-full scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-950">
         {props.hours.map((hour) => {
           const WeatherIcon =
             weatherConditionIcons[hour.icon as WeatherIconKey];
