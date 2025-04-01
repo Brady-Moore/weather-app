@@ -112,28 +112,42 @@ export default function SearchBar(props: SearchBarProps) {
           !event.relatedTarget?.contains(event.target) &&
           setSearchHasFocus(false)
         }
+        className="relative"
       >
-        <input
-          type="search"
-          ref={searchBoxRef}
-          className="outline-2 outline-neutral-700 rounded-md w-full"
-          onChange={(event) => updateAutoSuggestions(event.target.value)}
-          onKeyDown={handleSearchKeyDown}
-        />
+        <div className="flex outline-2 outline-neutral-700 rounded-md">
+          <input
+            type="search"
+            ref={searchBoxRef}
+            className="grow outline-none px-2 py-1"
+            onChange={(event) => updateAutoSuggestions(event.target.value)}
+            onKeyDown={handleSearchKeyDown}
+          />
+          <HiSearch
+            data-testid="search-button"
+            className="size-8 inline"
+            onClick={() =>
+              router.push(
+                `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
+              )
+            }
+          />
+        </div>
+
         {autoSuggestions.length > 0 && searchHasFocus ? (
-          <div className="absolute z-10 ">
+          <div className="absolute w-full ">
             <div
               className={
-                "border-1 bg-neutral-950 " + props.autoSuggestClassName
+                "border-2 border-neutral-700 bg-neutral-950 border-t-0 " +
+                props.autoSuggestClassName
               }
             >
               {autoSuggestions.map((cityData, index) => (
                 <div
                   className={
-                    index == autoSuggestionSelected
-                      ? "bg-neutral-700 text-neutral-50 p-1" +
+                    (index == autoSuggestionSelected
+                      ? "bg-neutral-700 text-neutral-50" +
                         props.autoSuggestSelectedClassName
-                      : "p-1"
+                      : "") + " px-2 py-1"
                   }
                   key={cityData.name}
                   onClick={() => setAutoSuggestionSelected(index)}
@@ -144,15 +158,6 @@ export default function SearchBar(props: SearchBarProps) {
             </div>
           </div>
         ) : null}
-        <HiSearch
-          data-testid="search-button"
-          className="size-5 inline ml-1"
-          onClick={() =>
-            router.push(
-              `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
-            )
-          }
-        />
       </div>
     </div>
   );
