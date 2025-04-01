@@ -7,7 +7,7 @@ describe("CurrentConditionsCard", () => {
       <CurrentConditionsCard
         date={"2025-03-23"}
         time={"12:39:23"}
-        currentTemp={10}
+        currentTemp={10.4}
         feelslike={8}
         conditions={"Rainy"}
         icon={"rain"}

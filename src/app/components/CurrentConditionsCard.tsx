@@ -30,7 +30,7 @@ export default function CurrentConditionsCard(
           </span>
         </div>
         <div className="text-4xl flex justify-center items-center pt-3">
-          {props.currentTemp}°
+          {roundNumber(props.currentTemp)}°
         </div>
         <div>
           <span className="text-lg">{props.conditions}</span>
