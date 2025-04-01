@@ -22,22 +22,22 @@ export default function CurrentConditionsCard(
   const WeatherIcon = weatherConditionIcons[props.icon];
   return (
     <CardBorder>
-      <div className="bg-neutral-950 rounded-sm text-neutral-50">
-        <div className="flex justify-between alig px-2 text-sm">
+      <div className="bg-neutral-950 rounded-sm text-neutral-50 px-2 py-1">
+        <div className="flex justify-between alig text-sm">
           <span>{props.resolvedAddress}</span>
           <span className="text-neutral-500 text-xs">
             As of {formatTime(props.time)}, {dayFromDate(props.date)}
           </span>
         </div>
-        <div className="text-4xl flex justify-center items-center pt-2">
+        <div className="text-4xl flex justify-center items-center pt-3">
           {props.currentTemp}°
+        </div>
+        <div>
+          <span className="text-lg">{props.conditions}</span>
+          <WeatherIcon data-testid={props.icon} className="size-7 inline" />
         </div>
         <div className="text-neutral-500">
           H: {roundNumber(props.tempmax)}° L: {roundNumber(props.tempmin)}°
-        </div>
-        <div>
-          <span className="text-xs">{props.conditions}</span>
-          <WeatherIcon data-testid={props.icon} className="size-5 inline" />
         </div>
       </div>
     </CardBorder>
