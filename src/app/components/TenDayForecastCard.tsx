@@ -6,7 +6,6 @@ import dayFromDate from "../util/dayFromDate";
 import {
   isWeatherIconKey,
   weatherConditionIcons,
-  WeatherIconKey,
 } from "../util/WeatherConditionIcons";
 import { RxValueNone } from "rocketicons/rx";
 

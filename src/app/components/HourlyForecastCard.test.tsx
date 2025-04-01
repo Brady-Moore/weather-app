@@ -1,12 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import HourlyForecastCard from "./HourlyForecastCard";
+import { visualCrossingSampleData } from "../test/sample-data";
 
-jest.mock("../util/WeatherConditionIcons.tsx", () => ({
-  weatherConditionIcons: {
-    "clear-day": (props: any) => (
-      <div data-testid="weather-icon">Clear Day Icon</div>
-    ),
-  },
+jest.mock("rocketicons/wi", () => ({
+  WiSnow: () => <svg data-testid="weather-icon" />,
+  WiRain: () => <svg data-testid="weather-icon" />,
+  WiFog: () => <svg data-testid="weather-icon" />,
+  WiWindy: () => <svg data-testid="weather-icon" />,
+  WiCloudy: () => <svg data-testid="weather-icon" />,
+  WiDayCloudy: () => <svg data-testid="weather-icon" />,
+  WiNightAltPartlyCloudy: () => <svg data-testid="weather-icon" />,
+  WiDaySunny: () => <div data-testid="weather-icon">Clear Day Icon</div>,
+  WiNightClear: () => <svg data-testid="weather-icon" />,
+}));
+
+jest.mock("rocketicons/rx", () => ({
+  RxValueNone: () => <svg data-testid="weather-fallback-icon" />,
 }));
 
 describe("HourlyForecastCard component", () => {
@@ -32,5 +41,16 @@ describe("HourlyForecastCard component", () => {
 
     const weatherIcons = screen.getAllByTestId("weather-icon");
     expect(weatherIcons.length).toBe(2);
+  });
+
+  test("renders fallback weather icons for invalid weather icon string", () => {
+    render(
+      <HourlyForecastCard
+        hours={[
+          { ...visualCrossingSampleData.days[0].hours[0], icon: "INVALID" },
+        ]}
+      />
+    );
+    screen.getByTestId("weather-fallback-icon");
   });
 });

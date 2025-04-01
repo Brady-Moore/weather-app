@@ -11,16 +11,23 @@ jest.mock("../util/dayFromDate", () => ({
   default: (dateStr: string) => `Day-${dateStr}`,
 }));
 
-jest.mock("../util/WeatherConditionIcons.tsx", () => ({
-  weatherConditionIcons: {
-    "clear-day": (props: any) => <svg data-testid="weather-icon" {...props} />,
-    cloudy: (props: any) => <svg data-testid="weather-icon" {...props} />,
-    snow: (props: any) => <svg data-testid="fallback-icon" {...props} />,
-  },
-  isWeatherIconKey: (key: string) => ["clear-day", "cloudy"].includes(key),
+jest.mock("rocketicons/wi", () => ({
+  WiSnow: () => <svg data-testid="weather-icon" />,
+  WiRain: () => <svg data-testid="weather-icon" />,
+  WiFog: () => <svg data-testid="weather-icon" />,
+  WiWindy: () => <svg data-testid="weather-icon" />,
+  WiCloudy: () => <svg data-testid="weather-icon" />,
+  WiDayCloudy: () => <svg data-testid="weather-icon" />,
+  WiNightAltPartlyCloudy: () => <svg data-testid="weather-icon" />,
+  WiDaySunny: () => <svg data-testid="weather-icon" />,
+  WiNightClear: () => <svg data-testid="weather-icon" />,
 }));
 
-const mockDays: WeatherDataDay[] = [
+jest.mock("rocketicons/rx", () => ({
+  RxValueNone: () => <svg data-testid="weather-fallback-icon" />,
+}));
+
+const sampleDays: WeatherDataDay[] = [
   {
     datetime: "2025-03-28",
     tempmax: 15.8,
@@ -69,19 +76,19 @@ const mockDays: WeatherDataDay[] = [
 
 describe("TenDayForecastCard", () => {
   test("renders the title and calendar icon", () => {
-    render(<TenDayForecastCard days={mockDays} />);
+    render(<TenDayForecastCard days={sampleDays} />);
     expect(screen.getByText("10-Day Forecast")).toBeInTheDocument();
     expect(screen.getByTestId("calendar-icon")).toBeInTheDocument();
   });
 
   test("renders one forecast row per day", () => {
-    render(<TenDayForecastCard days={mockDays} />);
+    render(<TenDayForecastCard days={sampleDays} />);
     const rows = screen.getAllByText(/Day-2025/);
     expect(rows).toHaveLength(2);
   });
 
   test("displays the correct date and rounded temperatures", () => {
-    render(<TenDayForecastCard days={mockDays} />);
+    render(<TenDayForecastCard days={sampleDays} />);
     expect(screen.getByText("Day-2025-03-28")).toBeInTheDocument();
     expect(screen.getByText("5°")).toBeInTheDocument();
     expect(screen.getByText("16°")).toBeInTheDocument();
@@ -92,8 +99,15 @@ describe("TenDayForecastCard", () => {
   });
 
   test("renders weather icons for each day", () => {
-    render(<TenDayForecastCard days={mockDays} />);
+    render(<TenDayForecastCard days={sampleDays} />);
     const icons = screen.getAllByTestId("weather-icon");
     expect(icons).toHaveLength(2);
+  });
+
+  test("renders fallback weather icons for invalid weather icon string", () => {
+    render(
+      <TenDayForecastCard days={[{ ...sampleDays[0], icon: "INVALID" }]} />
+    );
+    screen.getByTestId("weather-fallback-icon");
   });
 });
