@@ -10,11 +10,10 @@ export default function CardBorder(props: CardBorderProps) {
   const classNameBorder = props.classNameBorder ?? "border-neutral-700";
   return (
     <div
-      className={
-        "rounded-md border-2 bg-neutral-950 p-3 " +
-        props.className +
-        " " +
-        classNameBorder
+      className={joinClassNames(
+        "rounded-md border-2 bg-neutral-950 p-3",
+        props.className,
+        classNameBorder)
       }
     >
       {props.children}
