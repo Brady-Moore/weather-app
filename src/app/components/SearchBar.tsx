@@ -106,7 +106,7 @@ export default function SearchBar(props: SearchBarProps) {
           !event.relatedTarget?.contains(event.target) &&
           setSearchHasFocus(false)
         }
-        className="relative"
+        className="relative "
       >
         <div
           className={joinClassNames(

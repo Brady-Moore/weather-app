@@ -36,11 +36,12 @@ export default async function Home({ searchParams }: HomeProps) {
         : undefined;
 
   return (
-    <div className="flex flex-col gap-8 m-5 mb-7">
+    <div className="flex flex-col gap-8 m-5 mb-7 ">
       <SearchBar
         autoSuggestLimit={10}
         autoSuggestSort="population"
         autoSuggestSortDesc
+        className="max-w-xl"
       />
       {weatherDataResponse?.error ? (
         <ErrorMessage error={weatherDataResponse.error} />
