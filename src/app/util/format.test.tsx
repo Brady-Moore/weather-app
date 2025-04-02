@@ -1,4 +1,4 @@
-import { formatTime } from "./formatTime";
+import { formatTime } from "./format";
 
 describe("formatTime", () => {
   test("returns a valid time string without leading 0's or seconds", () => {

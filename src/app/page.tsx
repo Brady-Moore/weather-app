@@ -13,13 +13,11 @@ import PrecipitationCard from "./components/PrecipitationCard";
 import SunsetCard from "./components/SunsetCard";
 import WindCard from "./components/WindCard";
 import CurrentConditionsCard from "./components/CurrentConditionsCard";
-import {
-  isWeatherIconKey,
-  WeatherIconKey,
-  weatherIconKeys,
-} from "./components/WeatherConditionIcons";
+import { isWeatherIconKey } from "./util/weatherconditionicons";
 import TenDayForecastCard from "./components/TenDayForecastCard";
 import HourlyForecastCard from "./components/HourlyForecastCard";
+import { BsGithub } from "rocketicons/bs";
+import Link from "next/link";
 
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -38,9 +36,8 @@ export default async function Home({ searchParams }: HomeProps) {
         : undefined;
 
   return (
-    <div>
+    <div className="flex flex-col gap-8 m-5 mb-7">
       <SearchBar
-        className="grid justify-end p-5"
         autoSuggestLimit={10}
         autoSuggestSort="population"
         autoSuggestSortDesc
@@ -51,8 +48,9 @@ export default async function Home({ searchParams }: HomeProps) {
       {!weatherDataResponse?.data ? <SampleDataLink /> : null}
       <div>
         {weatherDataResponse?.data ? (
-          <div className="grid">
+          <div className="grid grid-cols-2 gap-3">
             <CurrentConditionsCard
+              className="col-span-2"
               date={weatherDataResponse.data.days[0].datetime}
               time={weatherDataResponse.data.currentConditions.datetime}
               currentTemp={weatherDataResponse.data.currentConditions.temp}
@@ -69,9 +67,13 @@ export default async function Home({ searchParams }: HomeProps) {
               tempmax={weatherDataResponse.data.days[0].tempmax}
               tempmin={weatherDataResponse.data.days[0].tempmin}
             />
-            <TenDayForecastCard days={weatherDataResponse.data.days} />
             <HourlyForecastCard
+              className="col-span-2"
               hours={weatherDataResponse.data.days[0].hours}
+            />
+            <TenDayForecastCard
+              className="col-span-2"
+              days={weatherDataResponse.data.days}
             />
             <FeelsLikeCard
               temp={weatherDataResponse.data.days[0].temp}
@@ -103,6 +105,15 @@ export default async function Home({ searchParams }: HomeProps) {
             />
           </div>
         ) : null}
+      </div>
+      <div>
+        <BsGithub className="size-4 inline mr-2" />
+        <Link
+          className="underline"
+          href="https://github.com/Brady-Moore/weather-app"
+        >
+          Repository
+        </Link>
       </div>
     </div>
   );

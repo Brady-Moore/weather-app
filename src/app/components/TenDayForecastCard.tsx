@@ -6,11 +6,12 @@ import dayFromDate from "../util/dayFromDate";
 import {
   isWeatherIconKey,
   weatherConditionIcons,
-} from "./WeatherConditionIcons";
+} from "../util/weatherconditionicons";
 import { RxValueNone } from "rocketicons/rx";
 
 interface TenDayForecastCardProps {
   days: WeatherDataDay[];
+  className?: string;
 }
 
 export default function TenDayForecastCard(props: TenDayForecastCardProps) {
@@ -18,6 +19,7 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
     <WeatherCard
       title="10-Day Forecast"
       icon={<BiCalendar className="size-5 inline" />}
+      className={props.className}
     >
       <div>
         {props.days.map((day) => {
@@ -26,11 +28,16 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
             : RxValueNone;
 
           return (
-            <div key={day.datetime} className="flex justify-between text-sm">
-              <span>{dayFromDate(day.datetime)}</span>
-              <WeatherIcon className="size-5" />
-              <span>{roundNumber(day.tempmin)}°</span>
-              <span>{roundNumber(day.tempmax)}°</span>
+            <div
+              key={day.datetime}
+              className="grid grid-cols-4 gap-2 items-center ml-1.5"
+            >
+              <span className="text-left">{dayFromDate(day.datetime)}</span>
+              <div className="flex justify-end">
+                <WeatherIcon className="w-5 h-5" />
+              </div>
+              <span className="text-right">{roundNumber(day.tempmin)}°</span>
+              <span className="text-right">{roundNumber(day.tempmax)}°</span>
             </div>
           );
         })}
