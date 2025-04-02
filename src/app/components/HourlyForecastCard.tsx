@@ -4,7 +4,7 @@ import {
   isWeatherIconKey,
   weatherConditionIcons,
   WeatherIconKey,
-} from "../util/WeatherConditionIcons";
+} from "../util/weatherconditionicons";
 import { FiClock } from "rocketicons/fi";
 import { WeatherDataDayHour } from "../visual-crossing/visual-crossing-api";
 import { formatTime } from "../util/format";

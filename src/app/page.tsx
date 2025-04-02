@@ -13,7 +13,7 @@ import PrecipitationCard from "./components/PrecipitationCard";
 import SunsetCard from "./components/SunsetCard";
 import WindCard from "./components/WindCard";
 import CurrentConditionsCard from "./components/CurrentConditionsCard";
-import { isWeatherIconKey } from "./util/WeatherConditionIcons";
+import { isWeatherIconKey } from "./util/weatherconditionicons";
 import TenDayForecastCard from "./components/TenDayForecastCard";
 import HourlyForecastCard from "./components/HourlyForecastCard";
 import { BsGithub } from "rocketicons/bs";

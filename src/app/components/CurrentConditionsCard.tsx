@@ -5,7 +5,7 @@ import CardBorder from "./CardBorder";
 import {
   weatherConditionIcons,
   WeatherIconKey,
-} from "../util/WeatherConditionIcons";
+} from "../util/weatherconditionicons";
 
 export interface CurrentConditionsCardProps {
   className?: string;

@@ -6,7 +6,7 @@ import dayFromDate from "../util/dayFromDate";
 import {
   isWeatherIconKey,
   weatherConditionIcons,
-} from "../util/WeatherConditionIcons";
+} from "../util/weatherconditionicons";
 import { RxValueNone } from "rocketicons/rx";
 
 interface TenDayForecastCardProps {
