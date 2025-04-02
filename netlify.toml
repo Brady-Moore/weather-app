@@ -1,3 +1,5 @@
 [functions]
+# https://docs.netlify.com/configure-builds/file-based-configuration/#functions
+
 # include all text data files
 included_files = ["src/**/*.txt"]
