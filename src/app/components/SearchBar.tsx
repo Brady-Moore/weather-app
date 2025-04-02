@@ -143,9 +143,8 @@ export default function SearchBar(props: SearchBarProps) {
             onKeyDown={handleSearchKeyDown}
           />
           <div
-            tabIndex={0}
             data-testid="search-button"
-            className="inline-block"
+            className="inline-block outline-0"
             onClick={() => runQuery(searchBoxRef.current?.value)}
           >
             <HiSearch className="size-8" />
