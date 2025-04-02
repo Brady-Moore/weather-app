@@ -119,7 +119,7 @@ export default function SearchBar(props: SearchBarProps) {
       <div
         ref={searchDivRef}
         tabIndex={-1}
-        onFocus={(event) => setSearchHasFocus(true)}
+        onFocus={() => setSearchHasFocus(true)}
         onBlur={(event) =>
           !event.relatedTarget?.contains(event.target) &&
           setSearchHasFocus(false)
