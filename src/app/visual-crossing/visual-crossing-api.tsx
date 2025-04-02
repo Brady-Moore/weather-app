@@ -192,7 +192,7 @@ export async function getWeatherData(
   try {
     const encodedCity = encodeURIComponent(city);
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}/next10days?unitGroup=metric&key=${key}&contentType=json`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedCity}/next9days?unitGroup=metric&key=${key}&contentType=json`
     );
     if (!response.ok) {
       return {

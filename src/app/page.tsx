@@ -36,84 +36,89 @@ export default async function Home({ searchParams }: HomeProps) {
         : undefined;
 
   return (
-    <div className="flex flex-col gap-8 m-5 mb-7">
-      <SearchBar
-        autoSuggestLimit={10}
-        autoSuggestSort="population"
-        autoSuggestSortDesc
-      />
-      {weatherDataResponse?.error ? (
-        <ErrorMessage error={weatherDataResponse.error} />
-      ) : null}
-      {!weatherDataResponse?.data ? <SampleDataLink /> : null}
-      <div>
-        {weatherDataResponse?.data ? (
-          <div className="grid grid-cols-2 gap-3">
-            <CurrentConditionsCard
-              className="col-span-2"
-              date={weatherDataResponse.data.days[0].datetime}
-              time={weatherDataResponse.data.currentConditions.datetime}
-              currentTemp={weatherDataResponse.data.currentConditions.temp}
-              feelslike={weatherDataResponse.data.days[0].windspeed}
-              conditions={weatherDataResponse.data.currentConditions.conditions}
-              icon={
-                isWeatherIconKey(
-                  weatherDataResponse.data.currentConditions.icon
-                )
-                  ? weatherDataResponse.data.currentConditions.icon
-                  : "snow"
-              }
-              resolvedAddress={weatherDataResponse.data.resolvedAddress}
-              tempmax={weatherDataResponse.data.days[0].tempmax}
-              tempmin={weatherDataResponse.data.days[0].tempmin}
-            />
-            <HourlyForecastCard
-              className="col-span-2"
-              hours={weatherDataResponse.data.days[0].hours}
-            />
-            <TenDayForecastCard
-              className="col-span-2"
-              days={weatherDataResponse.data.days}
-            />
-            <FeelsLikeCard
-              temp={weatherDataResponse.data.days[0].temp}
-              feelslike={weatherDataResponse.data.days[0].feelslike}
-            />
-            <HumidityCard
-              dew={weatherDataResponse.data.days[0].temp}
-              humidity={weatherDataResponse.data.days[0].humidity}
-            />
-            <VisibilityCard
-              visibility={weatherDataResponse.data.days[0].visibility}
-            />
-            <UVIndexCard uvindex={weatherDataResponse.data.days[0].uvindex} />
-            <PressureCard
-              pressure={weatherDataResponse.data.days[0].pressure}
-            />
-            <PrecipitationCard
-              precip={weatherDataResponse.data.days[0].precip}
-              tomorrowPrecip={weatherDataResponse.data.days[1].precip}
-            />
-            <SunsetCard
-              sunset={weatherDataResponse.data.days[0].sunset}
-              tomorrowSunrise={weatherDataResponse.data.days[1].sunrise}
-            />
-            <WindCard
-              windspeed={weatherDataResponse.data.days[0].windspeed}
-              windgust={weatherDataResponse.data.days[0].windgust}
-              winddir={weatherDataResponse.data.days[0].winddir}
-            />
-          </div>
+    <div className="m-5 mb-7">
+      <div className="md:m-auto md:max-w-[1280px] flex flex-col gap-8">
+        <SearchBar
+          autoSuggestLimit={10}
+          autoSuggestSort="population"
+          autoSuggestSortDesc
+          className="max-w-xl"
+        />
+        {weatherDataResponse?.error ? (
+          <ErrorMessage error={weatherDataResponse.error} />
         ) : null}
-      </div>
-      <div>
-        <BsGithub className="size-4 inline mr-2" />
-        <Link
-          className="underline"
-          href="https://github.com/Brady-Moore/weather-app"
-        >
-          Repository
-        </Link>
+        {!weatherDataResponse?.data ? <SampleDataLink /> : null}
+        <div>
+          {weatherDataResponse?.data ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <CurrentConditionsCard
+                className="col-span-2"
+                date={weatherDataResponse.data.days[0].datetime}
+                time={weatherDataResponse.data.currentConditions.datetime}
+                currentTemp={weatherDataResponse.data.currentConditions.temp}
+                feelslike={weatherDataResponse.data.days[0].windspeed}
+                conditions={
+                  weatherDataResponse.data.currentConditions.conditions
+                }
+                icon={
+                  isWeatherIconKey(
+                    weatherDataResponse.data.currentConditions.icon
+                  )
+                    ? weatherDataResponse.data.currentConditions.icon
+                    : "snow"
+                }
+                resolvedAddress={weatherDataResponse.data.resolvedAddress}
+                tempmax={weatherDataResponse.data.days[0].tempmax}
+                tempmin={weatherDataResponse.data.days[0].tempmin}
+              />
+              <HourlyForecastCard
+                className="col-span-2 md:order-3 md:col-span-4"
+                hours={weatherDataResponse.data.days[0].hours}
+              />
+              <TenDayForecastCard
+                className="col-span-2 md:row-span-3"
+                days={weatherDataResponse.data.days}
+              />
+              <FeelsLikeCard
+                temp={weatherDataResponse.data.days[0].temp}
+                feelslike={weatherDataResponse.data.days[0].feelslike}
+              />
+              <HumidityCard
+                dew={weatherDataResponse.data.days[0].temp}
+                humidity={weatherDataResponse.data.days[0].humidity}
+              />
+              <VisibilityCard
+                visibility={weatherDataResponse.data.days[0].visibility}
+              />
+              <UVIndexCard uvindex={weatherDataResponse.data.days[0].uvindex} />
+              <PressureCard
+                pressure={weatherDataResponse.data.days[0].pressure}
+              />
+              <PrecipitationCard
+                precip={weatherDataResponse.data.days[0].precip}
+                tomorrowPrecip={weatherDataResponse.data.days[1].precip}
+              />
+              <SunsetCard
+                sunset={weatherDataResponse.data.days[0].sunset}
+                tomorrowSunrise={weatherDataResponse.data.days[1].sunrise}
+              />
+              <WindCard
+                windspeed={weatherDataResponse.data.days[0].windspeed}
+                windgust={weatherDataResponse.data.days[0].windgust}
+                winddir={weatherDataResponse.data.days[0].winddir}
+              />
+            </div>
+          ) : null}
+        </div>
+        <div>
+          <BsGithub className="size-4 inline mr-2" />
+          <Link
+            className="underline"
+            href="https://github.com/Brady-Moore/weather-app"
+          >
+            Repository
+          </Link>
+        </div>
       </div>
     </div>
   );

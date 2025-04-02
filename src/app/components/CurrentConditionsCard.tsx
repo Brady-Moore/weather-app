@@ -38,7 +38,10 @@ export default function CurrentConditionsCard(
         </div>
         <div>
           <span className="text-lg">{props.conditions}</span>
-          <WeatherIcon data-testid={props.icon} className="size-7 inline" />
+          <WeatherIcon
+            data-testid={props.icon}
+            className="size-7 inline text-neutral-400"
+          />
         </div>
         <div className="text-neutral-300">
           H: {roundNumber(props.tempmax)}° L: {roundNumber(props.tempmin)}°
