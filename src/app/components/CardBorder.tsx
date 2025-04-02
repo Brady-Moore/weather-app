@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { joinClassNames } from "../util/format";
 
 export interface CardBorderProps {
   className?: string;
@@ -13,8 +14,8 @@ export default function CardBorder(props: CardBorderProps) {
       className={joinClassNames(
         "rounded-md border-2 bg-neutral-950 p-3",
         props.className,
-        classNameBorder)
-      }
+        classNameBorder
+      )}
     >
       {props.children}
     </div>
