@@ -75,6 +75,13 @@ export default function SearchBar(props: SearchBarProps) {
     setAutoSuggestionSelected(-1);
   };
 
+  const runQuery = (query: string | undefined) => {
+    searchDivRef.current?.focus();
+    searchDivRef.current?.blur();
+    updateAutoSuggestions(query || "");
+    router.push(`/?city=${encodeURIComponent(query || "")}`);
+  };
+
   const handleSearchKeyDown = ((event) => {
     switch (event.key) {
       case "ArrowDown":
@@ -86,6 +93,9 @@ export default function SearchBar(props: SearchBarProps) {
       case "ArrowUp":
         setAutoSuggestionSelected(Math.max(autoSuggestionSelected - 1, 0));
         event.preventDefault();
+        break;
+      case "Enter":
+        runQuery(searchBoxRef.current?.value);
         break;
       default:
         break;
@@ -132,15 +142,13 @@ export default function SearchBar(props: SearchBarProps) {
             onChange={(event) => updateAutoSuggestions(event.target.value)}
             onKeyDown={handleSearchKeyDown}
           />
-          <HiSearch
+          <div
             data-testid="search-button"
-            className="inline-block size-8"
-            onClick={() =>
-              router.push(
-                `/?city=${encodeURIComponent(searchBoxRef.current?.value || "")}`
-              )
-            }
-          />
+            className="inline-block outline-0"
+            onClick={() => runQuery(searchBoxRef.current?.value)}
+          >
+            <HiSearch className="size-8" />
+          </div>
         </div>
 
         {autoSuggestVisible ? (
@@ -158,7 +166,14 @@ export default function SearchBar(props: SearchBarProps) {
                     "px-2 py-1"
                   )}
                   key={cityData.name}
-                  onClick={() => setAutoSuggestionSelected(index)}
+                  onClick={() => {
+                    setAutoSuggestionSelected(index);
+                    runQuery(
+                      createAutoSuggestQueryFromCityDataRow(
+                        autoSuggestions[index]
+                      )
+                    );
+                  }}
                 >
                   {createAutoSuggestQueryFromCityDataRow(cityData)}
                 </div>
