@@ -1,0 +1,3 @@
+[functions]
+# include all text data files
+included_files = ["src/**/*.txt"]
