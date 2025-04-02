@@ -21,7 +21,7 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
       icon={<BiCalendar className="size-5 inline" />}
       className={props.className}
     >
-      <div className="flex flex-col sm:gap-3">
+      <div className="flex flex-col md:gap-3">
         <div className="grid grid-cols-4 gap-2 items-center ml-1.5">
           <span className="text-left font-extralight text-neutral-400"></span>
           <span className="text-right font-extralight text-neutral-400">
@@ -44,7 +44,9 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
               key={day.datetime}
               className="grid grid-cols-4 gap-2 items-center ml-1.5"
             >
-              <span className="text-left">{dayFromDate(day.datetime)}</span>
+              <span className="text-left text-neutral-400">
+                {dayFromDate(day.datetime)}
+              </span>
               <div className="flex justify-end">
                 <WeatherIcon className="w-5 h-5" />
               </div>
