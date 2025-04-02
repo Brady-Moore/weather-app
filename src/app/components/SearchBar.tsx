@@ -53,6 +53,14 @@ export default function SearchBar(props: SearchBarProps) {
   const [searchHasFocus, setSearchHasFocus] = useState(false);
   const autoSuggestVisible = autoSuggestions.length > 0 && searchHasFocus;
 
+  const classNameBorderColor = searchHasFocus
+    ? "border-yellow-600"
+    : "border-neutral-600";
+  const classNameBorderBottomColor =
+    searchHasFocus && !autoSuggestVisible
+      ? "border-b-yellow-600"
+      : "border-b-neutral-600";
+
   const updateAutoSuggestions = async (query: string) => {
     setAutoSuggestions(
       (await citySearch(query))
@@ -110,7 +118,10 @@ export default function SearchBar(props: SearchBarProps) {
       >
         <div
           className={joinClassNames(
-            "flex border-2 border-neutral-700 p-3 gap-3",
+            "flex p-3 gap-3",
+            classNameBorderColor,
+            classNameBorderBottomColor,
+            "border-2",
             autoSuggestVisible ? "rounded-t-md" : "rounded-md"
           )}
         >
@@ -135,9 +146,10 @@ export default function SearchBar(props: SearchBarProps) {
         {autoSuggestVisible ? (
           <div className="absolute w-full">
             <div
-              className={
-                "border-2 border-neutral-700 bg-black border-t-0 rounded-b-md"
-              }
+              className={joinClassNames(
+                classNameBorderColor,
+                "border-2 bg-black border-t-0 rounded-b-md"
+              )}
             >
               {autoSuggestions.map((cityData, index) => (
                 <div
