@@ -50,8 +50,8 @@ export default function TenDayForecastCard(props: TenDayForecastCardProps) {
               <div className="flex justify-end">
                 <WeatherIcon className="w-5 h-5" />
               </div>
-              <span className="text-right">{roundNumber(day.tempmin)}°</span>
-              <span className="text-right">{roundNumber(day.tempmax)}°</span>
+              <span className="text-right">{roundNumber(day.tempmin)}°C</span>
+              <span className="text-right">{roundNumber(day.tempmax)}°C</span>
             </div>
           );
         })}

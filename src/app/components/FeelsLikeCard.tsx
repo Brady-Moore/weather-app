@@ -29,7 +29,7 @@ export default function FeelsLikeCard(props: FeelsLikeCardProps) {
           data-testid="thermometer-icon"
         />
       }
-      info={`${feelslikeRound}°`}
+      info={`${feelslikeRound}°C`}
       description={feelsLikeDescription(props.temp, props.feelslike)}
     />
   );

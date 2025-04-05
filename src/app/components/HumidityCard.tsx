@@ -15,7 +15,7 @@ export default function HumidityCard(props: HumidityCardProps) {
         <WiHumidity className="size-5 inline" data-testid="humidity-icon" />
       }
       info={`${roundNumber(props.humidity)}%`}
-      description={`The dew point is ${roundNumber(props.dew)}°`}
+      description={`The dew point is ${roundNumber(props.dew)}°C`}
     />
   );
 }

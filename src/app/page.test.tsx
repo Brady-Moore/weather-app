@@ -35,7 +35,7 @@ describe("Home Page", () => {
       })
     );
     screen.getByText(
-      Math.floor(visualCrossingSampleData.days[0].temp + 0.5) + "°"
+      Math.floor(visualCrossingSampleData.days[0].temp + 0.5) + "°C"
     );
   });
 
@@ -73,7 +73,7 @@ describe("Home Page", () => {
     );
 
     screen.getByText("Feels like");
-    screen.getByText("20°");
+    screen.getByText("20°C");
     screen.getByText("Feels about the same as the actual temperature");
   });
 });

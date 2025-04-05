@@ -36,8 +36,8 @@ describe("HourlyForecastCard component", () => {
     expect(screen.getByText("12:00")).toBeInTheDocument();
     expect(screen.getByText("13:00")).toBeInTheDocument();
 
-    expect(screen.getByText("23°")).toBeInTheDocument();
-    expect(screen.getByText("25°")).toBeInTheDocument();
+    expect(screen.getByText("23°C")).toBeInTheDocument();
+    expect(screen.getByText("25°C")).toBeInTheDocument();
 
     const weatherIcons = screen.getAllByTestId("weather-icon");
     expect(weatherIcons.length).toBe(2);

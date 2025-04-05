@@ -15,7 +15,7 @@ export default function WindCard(props: WindCardProps) {
   const windArr = [
     { label: "Wind Speed", value: `${windspeedRound} m/s` },
     { label: "Gusts", value: `${windgustRound} m/s` },
-    { label: "Direction", value: `${winddirRound}°` },
+    { label: "Direction", value: `${winddirRound}°C` },
   ];
   return (
     <WeatherCard
