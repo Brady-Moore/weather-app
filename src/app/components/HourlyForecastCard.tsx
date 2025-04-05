@@ -35,7 +35,7 @@ export default function HourlyForecastCard(props: HourlyForecastCardProps) {
             >
               <div className="mx-auto">{formatTime(hour.datetime)}</div>
               <WeatherIcon className="size-6 mx-auto" />
-              <div className="mx-auto mb-2">{roundNumber(hour.temp)}°</div>
+              <div className="mx-auto mb-2">{roundNumber(hour.temp)}°C</div>
             </div>
           );
         })}

@@ -34,7 +34,7 @@ export default function CurrentConditionsCard(
           </span>
         </div>
         <div className="text-6xl flex justify-center items-center pt-3">
-          {roundNumber(props.currentTemp)}°
+          {roundNumber(props.currentTemp)}°C
         </div>
         <div>
           <span className="text-lg">{props.conditions}</span>
@@ -44,7 +44,7 @@ export default function CurrentConditionsCard(
           />
         </div>
         <div className="text-neutral-300">
-          H: {roundNumber(props.tempmax)}° L: {roundNumber(props.tempmin)}°
+          H: {roundNumber(props.tempmax)}°C L: {roundNumber(props.tempmin)}°C
         </div>
       </div>
     </CardBorder>

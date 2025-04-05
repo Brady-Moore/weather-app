@@ -90,12 +90,12 @@ describe("TenDayForecastCard", () => {
   test("displays the correct date and rounded temperatures", () => {
     render(<TenDayForecastCard days={sampleDays} />);
     expect(screen.getByText("Day-2025-03-28")).toBeInTheDocument();
-    expect(screen.getByText("5°")).toBeInTheDocument();
-    expect(screen.getByText("16°")).toBeInTheDocument();
+    expect(screen.getByText("5°C")).toBeInTheDocument();
+    expect(screen.getByText("16°C")).toBeInTheDocument();
 
     expect(screen.getByText("Day-2025-03-29")).toBeInTheDocument();
-    expect(screen.getByText("7°")).toBeInTheDocument();
-    expect(screen.getByText("19°")).toBeInTheDocument();
+    expect(screen.getByText("7°C")).toBeInTheDocument();
+    expect(screen.getByText("19°C")).toBeInTheDocument();
   });
 
   test("renders weather icons for each day", () => {
