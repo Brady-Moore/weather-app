@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Home from "./page";
-import { visualCrossingSampleData } from "./test/sample-data";
+import { visualCrossingSampleData } from "./sampledata/sample-data";
 
 jest.mock("next/navigation", () => require("next-router-mock"));
 

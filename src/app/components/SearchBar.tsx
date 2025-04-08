@@ -128,7 +128,7 @@ export default function SearchBar(props: SearchBarProps) {
             "flex p-3 gap-3",
             classNameBorderColor,
             "border-2",
-            autoSuggestVisible ? "rounded-t-md border-b-0" : "rounded-md"
+            autoSuggestVisible ? "rounded-t-xl border-b-0" : "rounded-xl"
           )}
         >
           <input
@@ -152,7 +152,7 @@ export default function SearchBar(props: SearchBarProps) {
             <div
               className={joinClassNames(
                 classNameBorderColor,
-                "border-2 bg-black border-t-0 rounded-b-md"
+                "border-2 bg-black border-t-0 rounded-b-xl"
               )}
             >
               <div
