@@ -5,6 +5,8 @@
 
 http://bradyweatherapp.netlify.app
 
+![weather app capture](https://github.com/user-attachments/assets/53007759-2801-4582-b295-2d9daacce537)
+
 ## Getting Started
 
 First, set VISUAL_CROSSING_API_KEY using environment variables.
@@ -34,6 +36,19 @@ yarn dev
 pnpm dev
 # or
 bun dev
+```
+
+Run tests:
+
+```bash
+# run test suite
+npm run test
+
+# with code coverage report
+npm run test:coverage
+
+# in watch mode
+npm run test:watch
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
