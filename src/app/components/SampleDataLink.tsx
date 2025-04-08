@@ -13,7 +13,6 @@ export default function SampleDataLink() {
           some sample weather data!
         </div>
       </div>
-
       <div>
         <button
           className="bg-yellow-600 mt-10 rounded-xl border-0 p-0 cursor-pointer outline-offset-4 group"
