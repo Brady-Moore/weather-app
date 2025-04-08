@@ -56,10 +56,7 @@ export default function SearchBar(props: SearchBarProps) {
   const classNameBorderColor = searchHasFocus
     ? "border-yellow-600"
     : "border-neutral-600";
-  const classNameBorderBottomColor =
-    searchHasFocus && !autoSuggestVisible
-      ? "border-b-yellow-600"
-      : "border-b-neutral-600";
+  const classNameSeperatorColor = "border-neutral-600";
 
   const updateAutoSuggestions = async (query: string) => {
     setAutoSuggestions(
@@ -130,9 +127,8 @@ export default function SearchBar(props: SearchBarProps) {
           className={joinClassNames(
             "flex p-3 gap-3",
             classNameBorderColor,
-            classNameBorderBottomColor,
             "border-2",
-            autoSuggestVisible ? "rounded-t-xl" : "rounded-xl"
+            autoSuggestVisible ? "rounded-t-xl border-b-0" : "rounded-xl"
           )}
         >
           <input
@@ -159,25 +155,32 @@ export default function SearchBar(props: SearchBarProps) {
                 "border-2 bg-black border-t-0 rounded-b-xl"
               )}
             >
-              {autoSuggestions.map((cityData, index) => (
-                <div
-                  className={joinClassNames(
-                    index == autoSuggestionSelected ? "bg-neutral-700" : "",
-                    "px-2 py-1"
-                  )}
-                  key={cityData.name}
-                  onClick={() => {
-                    setAutoSuggestionSelected(index);
-                    runQuery(
-                      createAutoSuggestQueryFromCityDataRow(
-                        autoSuggestions[index]
-                      )
-                    );
-                  }}
-                >
-                  {createAutoSuggestQueryFromCityDataRow(cityData)}
-                </div>
-              ))}
+              <div
+                className={joinClassNames(
+                  classNameSeperatorColor,
+                  "border-t-2 mx-3"
+                )}
+              ></div>
+              <div className="flex flex-col px-3 py-3 gap-2">
+                {autoSuggestions.map((cityData, index) => (
+                  <div
+                    className={joinClassNames(
+                      index == autoSuggestionSelected ? "bg-neutral-700" : ""
+                    )}
+                    key={cityData.name}
+                    onClick={() => {
+                      setAutoSuggestionSelected(index);
+                      runQuery(
+                        createAutoSuggestQueryFromCityDataRow(
+                          autoSuggestions[index]
+                        )
+                      );
+                    }}
+                  >
+                    {createAutoSuggestQueryFromCityDataRow(cityData)}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ) : null}
