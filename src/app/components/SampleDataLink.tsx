@@ -15,7 +15,6 @@ export default function SampleDataLink() {
           some sample weather data!
         </div>
 
-        {/* <Link href="/?mode=sample">Generate with sample weather data</Link> */}
       </div>
 
       <div>
