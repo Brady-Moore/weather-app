@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import CardBorder from "./CardBorder";
 
 export default function SampleDataLink() {
   const router = useRouter();
@@ -14,8 +12,6 @@ export default function SampleDataLink() {
           Look up a city in the search bar above or use the link below to use
           some sample weather data!
         </div>
-
-        {/* <Link href="/?mode=sample">Generate with sample weather data</Link> */}
       </div>
 
       <div>
