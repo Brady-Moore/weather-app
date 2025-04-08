@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import HourlyForecastCard from "./HourlyForecastCard";
-import { visualCrossingSampleData } from "../test/sample-data";
+import { visualCrossingSampleData } from "../sampledata/sample-data";
 
 jest.mock("rocketicons/wi", () => ({
   WiSnow: () => <svg data-testid="weather-icon" />,

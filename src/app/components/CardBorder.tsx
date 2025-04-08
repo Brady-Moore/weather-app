@@ -12,7 +12,7 @@ export default function CardBorder(props: CardBorderProps) {
   return (
     <div
       className={joinClassNames(
-        "rounded-md border-2 bg-neutral-950 p-3",
+        "rounded-xl border-2 bg-neutral-950 p-3",
         props.className,
         classNameBorder
       )}

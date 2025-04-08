@@ -1,5 +1,5 @@
 import { getWeatherData } from "./visual-crossing-api";
-import { visualCrossingSampleData } from "../test/sample-data";
+import { visualCrossingSampleData } from "../sampledata/sample-data";
 
 describe("fetchWeatherData", () => {
   const sampleCityName = "samplecityname";

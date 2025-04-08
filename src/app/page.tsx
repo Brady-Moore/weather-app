@@ -1,6 +1,6 @@
 import { getWeatherData } from "./visual-crossing/visual-crossing-api";
 import SearchBar from "./components/SearchBar";
-import { visualCrossingSampleData } from "./test/sample-data";
+import { visualCrossingSampleData } from "./sampledata/sample-data";
 import SampleDataLink from "./components/SampleDataLink";
 import ErrorMessage from "./components/ErrorMessage";
 import { cityDataLoadIfNeeded } from "./geodata/geodata";
@@ -42,7 +42,7 @@ export default async function Home({ searchParams }: HomeProps) {
           autoSuggestLimit={10}
           autoSuggestSort="population"
           autoSuggestSortDesc
-          className="max-w-xl"
+          className="max-w-xl z-10"
         />
         {weatherDataResponse?.error ? (
           <ErrorMessage error={weatherDataResponse.error} />

@@ -132,7 +132,7 @@ export default function SearchBar(props: SearchBarProps) {
             classNameBorderColor,
             classNameBorderBottomColor,
             "border-2",
-            autoSuggestVisible ? "rounded-t-md" : "rounded-md"
+            autoSuggestVisible ? "rounded-t-xl" : "rounded-xl"
           )}
         >
           <input
@@ -156,7 +156,7 @@ export default function SearchBar(props: SearchBarProps) {
             <div
               className={joinClassNames(
                 classNameBorderColor,
-                "border-2 bg-black border-t-0 rounded-b-md"
+                "border-2 bg-black border-t-0 rounded-b-xl"
               )}
             >
               {autoSuggestions.map((cityData, index) => (
