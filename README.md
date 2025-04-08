@@ -44,7 +44,7 @@ Run tests:
 # run test suite
 npm run test
 
-# with code coverage report 
+# with code coverage report
 npm run test:coverage
 
 # in watch mode
